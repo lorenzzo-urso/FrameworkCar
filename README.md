@@ -29,17 +29,23 @@ Princípio de produto: **esconde a máquina pesada, ensina só o essencial.**
 | [`02-pesquisa/`](02-pesquisa/) | Persona Seu Raimundo + os 3 gargalos + o problema |
 | [`03-frameworks/`](03-frameworks/) | Value Proposition, Jornada, Lean Canvas |
 | [`04-arquitetura/`](04-arquitetura/) | Arquitetura em camadas + viabilidade honesta |
-| [`05-entregas/`](05-entregas/) | As 3 entregas obrigatórias: Ideação, Vídeo, Pitch |
+| [`05-entregas/`](05-entregas/) | As 3 entregas obrigatórias + o PRD do PoC |
 | [`06-referencias/`](06-referencias/) | Bases de dados abertas, resumo do edital, riscos e pendências |
+| [`poc/`](poc/) | **Código do PoC** — estrutura, contratos e regras para os 2 devs |
 
 **Comece por:** [`01-produto/produto.md`](01-produto/produto.md).
 
 ### Para os devs / Claude Code
 
-As 12 skills do haCARthon estão em `.claude/skills/` — abrindo este diretório no
+As 13 skills do haCARthon estão em `.claude/skills/` — abrindo este diretório no
 Claude Code, os comandos `/hacarthon-*` ficam disponíveis. Comece com
 `/hacarthon-status`. Contexto completo (incluindo o mapa de caminhos das skills)
 em [`CLAUDE.md`](CLAUDE.md).
+
+**Para construir o PoC:** leia o PRD em
+[`05-entregas/poc-backend-prd.md`](05-entregas/poc-backend-prd.md) e as regras de
+trabalho em [`poc/README.md`](poc/README.md). São 2 devs em paralelo — cada um é
+dono de uma pasta, e os dois só se tocam nos `poc/contracts/`.
 
 ---
 
@@ -47,9 +53,12 @@ em [`CLAUDE.md`](CLAUDE.md).
 
 | Entrega | Formato | Status |
 |---|---|---|
-| 1. Ideação | Formulário na plataforma (7 temas) | 📝 Rascunho — [`05-entregas/1-ideacao.md`](05-entregas/1-ideacao.md) |
+| 1. Ideação | Formulário na plataforma (10 campos) | ✅ Rascunho dos 10 campos — [`05-entregas/1-ideacao.md`](05-entregas/1-ideacao.md) (falta campo 1 reescrito + mentoria) |
 | 2. Protótipo | Vídeo ≤2min no YouTube | ⬜ A fazer — [`05-entregas/2-roteiro-video.md`](05-entregas/2-roteiro-video.md) |
 | 3. Pitch | PDF + áudio na plataforma | ⬜ A fazer — [`05-entregas/3-pitch.md`](05-entregas/3-pitch.md) |
+
+> **PoC em construção:** PRD pronto em [`05-entregas/poc-backend-prd.md`](05-entregas/poc-backend-prd.md);
+> estrutura de trabalho em [`poc/`](poc/).
 
 ---
 
@@ -58,8 +67,13 @@ em [`CLAUDE.md`](CLAUDE.md).
 Ver detalhe em [`06-referencias/riscos-e-pendencias.md`](06-referencias/riscos-e-pendencias.md).
 
 - 🔴 Confirmar com a organização: limite do vídeo (2 vs. 3 min) e lives obrigatórias
+- 🔴 Realizar a mentoria obrigatória (campo 10 da Ideação) e registrar o feedback
+- 🟡 Reescrever o campo 1 (Brainstorm) com o processo real do time
 - 🟡 Confirmar nomes definitivos (Terra Comum / Compadre são provisórios)
 - 🟢 1 número oficial de CARs pendentes; parceiro do piloto (CATI-SP)
+
+> Insumos já garantidos: base SFB de AL baixada, imóvel de demo do ambiente de
+> teste do SICAR identificado (Sítio Três Rios), persona validada com 5 produtores.
 
 ---
 
