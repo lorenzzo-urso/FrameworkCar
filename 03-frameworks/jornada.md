@@ -28,9 +28,9 @@ com medo. Ponto de intervenção prioritário.
 | # | Etapa | Dados abertos | Sente |
 |---|---|---|---|
 | 1 | Descoberta via canal de confiança (WhatsApp/CATI) | — | 😌 Acolhido |
-| 2 | Entende via 4 perguntas + camada semântica | MapBiomas + SIGEF | 😀 Clareza |
-| 3 | Mapa pré-preenchido, só confirma | SIGEF + MapBiomas + SICAR | 😊 No controle |
-| 4 | Validação antecipada antes do envio | MapBiomas vs. autodeclaração | 😎 Seguro |
+| 2 | Compadre explica o que precisa declarar, em linguagem simples | MapBiomas + SIGEF | 😀 Clareza |
+| 3 | Chega no SICAR preparado: sabe o que preencher, tem os dados em mãos | SIGEF + MapBiomas + SICAR | 😊 No controle |
+| 4 | Validação antecipada antes do envio — Compadre avisa se algo vai ser rejeitado | MapBiomas vs. autodeclaração + base SFB | 😎 Seguro |
 | 5 | **Notificação traduzida ⬅ HERO** | SICAR + ontologia | 😌 Medo → clareza |
 | 6 | Correção guiada, sem retrabalho | SIGEF/MapBiomas | 🙂 Resolutivo |
 | 7 | **Descobre benefícios ⬅ RECOMPENSA** | SICAR + base de programas | 🤩 Ganho inesperado |
@@ -47,8 +47,8 @@ A solução **eleva o vale** (Etapa 5: o colapso vira virada) e **aprofunda o pi
 |---|---|---|---|
 | 1 Gancho | 0:00–0:12 | Raimundo no celular, sem entender um aviso oficial | *"Seu Raimundo recebeu um aviso do governo sobre a terra dele. E não entendeu uma palavra."* |
 | 2 Problema | 0:12–0:28 | Tela do SICAR + notificação técnica | *"Declarar o CAR hoje é como preencher imposto de renda escrito por agrônomos. Quem trava, desiste — ou paga caro."* |
-| 3 Solução entra | 0:28–0:45 | WhatsApp: "Manda oi" → 4 perguntas | *"E se ele só precisasse responder pelo WhatsApp? O Compadre faz as perguntas certas."* |
-| 4 Passo principal | 0:45–1:12 | Mapa pré-preenchido + notificação traduzida | *"Os dados abertos já sabem onde é a mata e o rio — ele só confirma. E quando o governo aponta um erro, a gente traduz: o que é, por quê, e como resolver."* |
+| 3 Solução entra | 0:28–0:45 | WhatsApp: Raimundo manda a notificação → Compadre responde em português simples | *"E se alguém traduzisse isso pra ele? O Compadre lê a notificação do governo e explica o que fazer — pelo WhatsApp."* |
+| 4 Passo principal | 0:45–1:12 | Compadre explica o alerta, diz o que falta, abre o link direto na etapa certa do SICAR | *"Ele sabe o que é o código CIB, onde achar, e quando tiver em mãos — o link já está aberto na tela certa. Sem perder tempo procurando."* |
 | 5 Resultado | 1:12–1:30 | Programas desbloqueados (PSA, Pronaf Eco, suspensão de sanções) | *"Ele entrou pra evitar multa. Saiu descobrindo que pode acessar crédito e ser pago para preservar."* |
 | 6 Encerramento | 1:30–1:42 | Logo + frase-fecho + selo open-source/DPG | *"Compadre, sobre a Terra Comum. O CAR deixa de ser medo e vira oportunidade."* |
 

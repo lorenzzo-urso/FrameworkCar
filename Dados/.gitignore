@@ -1,0 +1,8 @@
+# Credenciais de teste — nunca commitar
+*.pdf
+
+# Dados geoespaciais binários — muito grandes para o git
+*.gpkg
+*.tif
+*.geojson
+Regularização Ambiental - Uso do Solo/

@@ -12,7 +12,8 @@
 | **MapBiomas** | Cobertura e uso do solo (histórico) | Validar APP/RL vs. autodeclaração | mapbiomas.org |
 | **Código Florestal** | Parâmetros legais (APP/RL por bioma) | Base da ontologia | Lei 12.651/2012 |
 | **RER (open-source)** | Registro/gestão do CAR (PostGIS, REST API) | Fundação transacional | github.com/Rural-Environmental-Registry/core |
-| **SNIF / Painel Regularização** | Status por estado, contexto | Métricas agregadas | snif.florestal.gov.br |
+| **SFB — Regularização Ambiental: Uso do Solo** | Base oficial de referência de uso e cobertura do solo por estado (atualizada 03/2025) | **Base de validação** — é a mesma que os analistas dos OEMAs usam para validar o CAR; pré-preencher com ela elimina a divergência na origem | snif.florestal.gov.br |
+| **SNIF / Painel Regularização** | Status por estado, % de análise pendente | Métricas para pitch e agente Territorial | snif.florestal.gov.br |
 
 ## Referências de ontologia (para reúso / alinhamento)
 

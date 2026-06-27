@@ -24,7 +24,7 @@
 | Recebe notificação do órgão e não sabe corrigir | Comunicação | Alta |
 | Medo de declarar errado e ser multado | Comunicação | Alta |
 | Não consegue usar o SICAR sozinho | Exclusão digital | Alta |
-| Vai-e-vem de retificações atrasa o benefício | Retificação | Alta |
+| Vai-e-vem de retificações atrasa o benefício — produtor e analista usam bases diferentes | Retificação | Alta |
 | Depende de intermediário pago para cada passo | Retificação | Média |
 | Não sabe que o CAR desbloqueia benefícios | Comunicação | Média |
 
@@ -46,8 +46,8 @@
 | Não entende APP/RL | Camada semântica explica e pré-preenche via SIGEF/MapBiomas | ✅ |
 | Notificação incompreensível | Traduz em "o quê / por quê / como corrigir" | ✅ forte |
 | Medo de declarar errado | Validação antecipada cruza declaração × dados abertos | ✅ |
-| Não usa o SICAR sozinho | Fluxo de 4-5 perguntas no WhatsApp | ✅ |
-| Vai-e-vem de retificações | Pré-preenchimento + validação cortam a causa raiz | ✅ |
+| Não usa o SICAR sozinho | Traduz o que cada etapa pede em linguagem simples + abre deep link direto na etapa certa do SICAR quando o Raimundo está pronto | ✅ |
+| Vai-e-vem de retificações | Usa a **mesma base de referência do SFB** que o analista do OEMA usa para validar — o CAR já chega certo na origem, sem divergência de base | ✅ forte |
 | Não sabe dos benefícios | Mostra os programas que o CAR habilita | ✅ diferencial |
 | Internet limitada | Canal leve (WhatsApp em 2G) | ⚠️ parcial |
 

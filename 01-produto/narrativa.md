@@ -65,14 +65,17 @@ Terra Comum (plataforma) + Compadre (agente). Ver seção acima.
 
 ## 5. Âncora de inovação
 
-> "Diferente do SICAR — que exige que o produtor saiba a regra — e diferente de
-> mais um chatbot que adivinha em cima de texto, o Compadre raciocina sobre a
-> Terra Comum: um modelo semântico aberto do Código Florestal e do território. Por
-> isso ele explica *por quê*, com rastreabilidade — e o mesmo modelo que ajuda o
-> Raimundo serve governo e cooperativas. É infraestrutura aberta, não um app fechado."
+> "A resposta óbvia ao Desafio 1 é um chatbot que ajuda o Raimundo. Nós
+> entregamos outra coisa: o substrato aberto para que qualquer agente entenda
+> o território rural. O Compadre é a prova; a Terra Comum é o protocolo."
+
+**A analogia que fecha o argumento:**
+> Outros times estão construindo um táxi. Nós estamos construindo a estrada.
 
 Três diferenciais concretos e verificáveis:
-1. **Raciocina sobre ontologia, não sobre texto** — consistente e rastreável
-   (não há implementação pública de ontologia para o CAR).
-2. **O mesmo modelo serve produtor + governo + cooperativas** — individual *e* coletivo.
-3. **Agent Hub aberto + construído sobre o RER** — terceiros criam agentes; é DPG.
+1. **Protocolo, não produto** — 1 camada semântica → N agentes → N personas.
+   Benefícios individuais *e* coletivos em uma única arquitetura.
+2. **Raciocina sobre ontologia, não sobre texto** — explica o *porquê*, com
+   rastreabilidade. Não existe implementação pública de ontologia para o CAR.
+3. **Agent Hub aberto + sobre o RER e a base SFB** — qualquer dev ou órgão
+   publica agentes na mesma plataforma; é DPG sobre infraestrutura do governo.

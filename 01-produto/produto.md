@@ -9,8 +9,10 @@ informação; é falta de contexto.**
 A solução tem duas faces que trabalham juntas:
 
 - **Compadre** — um assistente que conversa com o produtor pelo **WhatsApp** e o
-  ajuda a entender, declarar e corrigir o CAR em linguagem simples. É a cara
-  demonstrável da solução.
+  prepara para entender, declarar e corrigir o CAR em linguagem simples. Ele não
+  substitui o SICAR — fica na frente dele: traduz as pendências, explica o que
+  falta, e abre o link direto na etapa certa quando o produtor está pronto. É a
+  cara demonstrável da solução.
 - **Terra Comum** — uma **camada semântica aberta** do território rural: ontologia
   do Código Florestal + grafo de conhecimento + Agent Hub, construída sobre o RER
   open-source. É o motor invisível que faz o Compadre (e outros agentes) raciocinarem.
@@ -65,11 +67,26 @@ Detalhe em [`../03-frameworks/lean-canvas.md`](../03-frameworks/lean-canvas.md).
 
 ## Diferencial competitivo
 
-> Diferente do SICAR — que exige que o produtor saiba a regra — e diferente de
-> mais um chatbot que adivinha em cima de texto, o Compadre **raciocina sobre um
-> modelo semântico aberto** do Código Florestal e do território. Explica o *porquê*,
-> com rastreabilidade, e o mesmo modelo serve produtor, governo e cooperativas.
-> É infraestrutura aberta, não um aplicativo fechado.
+> A resposta óbvia ao Desafio 1 é um chatbot que ajuda o Raimundo. Essa resposta
+> existe — e outros times vão entregá-la. Nós entregamos outra coisa:
+> **o substrato aberto para que qualquer agente entenda o território rural.**
+>
+> **A analogia:** outros times estão construindo um táxi. Nós estamos construindo
+> a estrada.
+>
+> O Compadre (o agente do produtor) é a prova de que a estrada funciona. A Terra
+> Comum é o protocolo: 1 camada semântica → N agentes → N personas. O mesmo
+> modelo que ajuda o Raimundo serve o analista do OEMA, o gestor de crédito da
+> cooperativa e o formulador de política pública — benefícios individuais **e**
+> coletivos em uma única arquitetura.
+>
+> Três diferenciais verificáveis:
+> 1. **Raciocina sobre ontologia** — não é RAG de texto; explica o *porquê* com
+>    rastreabilidade. Não existe implementação pública de ontologia para o CAR.
+> 2. **Protocolo, não produto** — Agent Hub aberto: qualquer dev ou órgão publica
+>    agentes na mesma plataforma, com o mesmo conhecimento de base.
+> 3. **Sobre o RER e a base SFB** — mesma infraestrutura e mesmos dados do
+>    governo; não recriamos do zero, ampliamos com inteligência.
 
 Ver [`../01-produto/narrativa.md`](narrativa.md) e
 [`../01-produto/desafio-e-fit.md`](desafio-e-fit.md).

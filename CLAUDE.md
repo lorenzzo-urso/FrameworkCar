@@ -35,13 +35,16 @@ pelo WhatsApp). Princípio: **esconde a máquina pesada, ensina só o essencial.
 
 ## Skills (.claude/skills/)
 
-As 12 skills do haCARthon estão em `.claude/skills/`. Comece toda sessão com
+As 13 skills do haCARthon estão em `.claude/skills/`. Comece toda sessão com
 **`/hacarthon-status`**. Fluxo:
 
 ```
 status → pesquisa-produtor → convergencia → {value-proposition, user-journey, lean-canvas}
        → narrativa → ideacao → roteiro-prototipo → pitch → banca → checklist-entrega
 ```
+
+**`hacarthon-entrega-ideacao`** — skill nova para o formulário real da plataforma
+(10 campos). Usar no lugar de `hacarthon-ideacao` na hora da submissão final.
 
 Estado atual: etapas até **narrativa + ideação (rascunho)** concluídas. Próximo:
 **roteiro do vídeo** (`05-entregas/2-roteiro-video.md`).

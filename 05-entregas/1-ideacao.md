@@ -60,13 +60,43 @@ melhor avaliado). Regularização facilitada apoia o cumprimento do Código Flor
 construída sobre o RER open-source. Código aberto. Protótipo conceitual navegável.
 
 **Expandida:** A solução não parte do zero: usa bases abertas existentes — SICAR/
-consulta pública, SIGEF/INCRA, MapBiomas, parâmetros do Código Florestal. É
-construída sobre o **RER** open-source do governo (REST API + PostGIS), que **não
-tem** a camada semântica nem os agentes que adicionamos. O que criamos por cima é a
-**ontologia + camada semântica + Agent Hub**. Toda a solução é **código aberto**. No
-hackathon, demonstramos o agente do produtor com telas navegáveis e dados de teste; a
-arquitetura é apresentada como diagrama. *Escopo honesto:* instância própria do RER
-com dados de teste — não o sistema nacional ao vivo.
+consulta pública, SIGEF/INCRA, MapBiomas, parâmetros do Código Florestal e,
+principalmente, a **Base de Referência de Uso e Cobertura do Solo do SFB**
+(Serviço Florestal Brasileiro, atualizada 03/2025) — a mesma que os analistas dos
+OEMAs usam para validar o CAR. Pré-preencher com ela elimina a divergência de base
+que causa o ciclo de retificações. A solução é construída sobre o **RER**
+open-source do governo (REST API + PostGIS), que **não tem** a camada semântica nem
+os agentes que adicionamos. O que criamos por cima é a **ontologia + camada semântica
++ Agent Hub**. Toda a solução é **código aberto**. No hackathon, demonstramos o
+agente do produtor com telas navegáveis e dados de teste; a arquitetura é apresentada
+como diagrama. *Escopo honesto:* instância própria do RER com dados de teste — não o
+sistema nacional ao vivo.
+
+## 6. Diferencial
+
+**Curta:** Outros times criarão um assistente. Nós criamos a estrada — a camada
+semântica aberta sobre a qual qualquer agente pode entender o território rural.
+O Compadre é a prova; a Terra Comum é o protocolo.
+
+**Expandida:** A resposta óbvia ao Desafio 1 é um chatbot que ajuda o Raimundo.
+Essa resposta resolve o individual — mas não o coletivo. A Terra Comum faz
+diferente: em vez de construir um produto fechado para uma persona, construímos
+o **substrato aberto** para que qualquer organização — governo, cooperativa,
+pesquisador, OEMA — crie agentes que entendem o território rural. O Compadre
+(o agente do produtor) é só o primeiro. A mesma camada semântica serve o
+analista do órgão, o gestor de crédito da cooperativa e o formulador de política
+pública — cada um com seu agente, todos compartilhando o mesmo conhecimento.
+
+> **A analogia:** outros times estão construindo um táxi. Nós estamos
+> construindo a estrada.
+
+Três diferenciais verificáveis:
+1. **Raciocina sobre ontologia, não sobre texto** — não há implementação pública
+   de ontologia para o CAR; somos os primeiros
+2. **Protocolo, não produto** — 1 camada semântica → N agentes → N personas →
+   benefícios individuais e coletivos em uma única arquitetura
+3. **Construído sobre o RER e a base SFB** — a mesma infraestrutura e os mesmos
+   dados que o governo já usa; não recriamos do zero, ampliamos
 
 ## 6. Tempo de implementação
 - **Hackathon:** protótipo navegável do Compadre + ontologia/grafo mínimos + diagrama
