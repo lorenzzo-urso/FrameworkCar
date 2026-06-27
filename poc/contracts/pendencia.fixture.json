@@ -1,0 +1,23 @@
+{
+  "_comment": "Contrato: o que o conector SICAR (connectors/, Dev B) ENTREGA ao backend (Dev A). Dados do imovel de teste do ambiente oficial do SICAR (car-sus.dataprev.gov.br) — propriedade ficticia de testes, sem dado pessoal real. Backend deve rodar contra este fixture enquanto o scraping ao vivo nao existir.",
+  "numero_car": "RJ-3304300-C34F7184E63C4CCBBBF04FF840098E53",
+  "nome_imovel": "Sitio Tres Rios",
+  "municipio": "Rio Bonito",
+  "uf": "RJ",
+  "situacao": "Aguardando analise, passivel de revisao de dados",
+  "bioma": "Mata Atlantica",
+  "alertas": [
+    {
+      "etapa": "Imovel",
+      "tipo": "CIB_ausente",
+      "gravidade": "alerta",
+      "texto_original": "Informe o codigo CIB do imovel."
+    },
+    {
+      "etapa": "Representante",
+      "tipo": "representante_ausente",
+      "gravidade": "alerta",
+      "texto_original": "Nenhum representante foi adicionado."
+    }
+  ]
+}

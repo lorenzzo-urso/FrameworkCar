@@ -1,0 +1,36 @@
+{
+  "_comment": "Contrato: o que a API /conversa (backend/, Dev A) ENTREGA para a interface (web/, Dev B). A web deve renderizar contra este exemplo enquanto a API real nao existir. Campo 'regra_aplicada' e obrigatorio (P0-7): prova que a resposta vem da ontologia, nao de adivinhacao do LLM.",
+  "request": {
+    "numero_car": "RJ-3304300-C34F7184E63C4CCBBBF04FF840098E53",
+    "mensagem": "oi, tenho uma pendencia no meu CAR"
+  },
+  "response": {
+    "traducao": "Seu Sitio Tres Rios esta com dois avisos pequenos. O mais facil de resolver: falta o codigo CIB, que e o numero da escritura registrada do seu imovel. Voce tem a escritura em maos?",
+    "pendencias": [
+      {
+        "tipo": "CIB_ausente",
+        "gravidade": "alerta",
+        "explicacao": "Falta o codigo CIB — o numero de registro do imovel.",
+        "o_que_fazer": "Pegue a escritura registrada em cartorio e informe o numero do CIB."
+      },
+      {
+        "tipo": "representante_ausente",
+        "gravidade": "alerta",
+        "explicacao": "Nenhum representante foi adicionado ao cadastro.",
+        "o_que_fazer": "Se voce mesmo cuida do imovel, pode se adicionar como representante."
+      }
+    ],
+    "regra_aplicada": {
+      "conceito": "Pendencia.CIB_ausente",
+      "parametro_legal": "Cadastro exige associacao ao registro do imovel (CIB/SNCR)",
+      "fonte": "Manual do CAR / regras do SICAR",
+      "rastro_ontologia": "car:Pendencia -> car:exigeDocumento -> car:CIB"
+    },
+    "proximo_passo": "Resolver o CIB primeiro (mais simples). Depois adicionar o representante.",
+    "link_sicar": "https://car-sus.dataprev.gov.br/#/",
+    "beneficios": [
+      "Pronaf Eco",
+      "PSA — Pagamento por Servicos Ambientais"
+    ]
+  }
+}

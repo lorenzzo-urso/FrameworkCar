@@ -1,0 +1,40 @@
+# Manifesto do agente Compadre — carregado pelo loader (P0-1).
+# Prova o conceito "agente definido por manifesto, plugavel na plataforma".
+# Protocolo-agnostico de proposito: nao assume como um Hub externo o invoca.
+# Trocar este arquivo muda o comportamento do agente sem mudar o codigo do loader.
+
+apiVersion: terracomum/v1
+kind: Agent
+
+metadata:
+  name: compadre
+  description: ajuda o produtor rural a entender e corrigir o CAR pelo WhatsApp
+  persona_alvo: Seu Raimundo
+
+spec:
+  # A que conceitos da ontologia este agente raciocina (o diferencial)
+  ontology:
+    source: car.ttl
+    concepts: [APP, ReservaLegal, Pendencia, Beneficio]
+
+  # Capacidades que o agente usa para responder
+  tools:
+    - consultar_sicar       # connectors/ (Dev B) — busca a pendencia
+    - consultar_ontologia   # backend/ (Dev A) — busca a regra aplicavel
+    - traduzir_llm          # backend/ (Dev A) — poe em linguagem simples
+
+  # Politica de raciocinio
+  policy:
+    rules:
+      - traduzir a pendencia tecnica em linguagem simples
+      - identificar a regra concreta na ontologia (obrigatorio citar — P0-7)
+      - sugerir o proximo passo acionavel
+      - mostrar os beneficios que o CAR regularizado desbloqueia
+
+  # Formato de saida (bate com contracts/conversa.example.json)
+  output: orientacao_produtor
+
+  # Deixado em aberto — nao assumir nada sobre Hub externo (web3 ou outro)
+  runtime:
+    protocol: ~
+    endpoint: ~
