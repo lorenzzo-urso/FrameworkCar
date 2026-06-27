@@ -36,22 +36,28 @@ def main():
         onto.app_hidrica(largura_rio_m=8),
     )
 
-    # 3. Reserva Legal para o bioma do imóvel
+    # 3. Se houver nascente no sítio, o raio de proteção
     bloco(
-        "3) Reserva Legal exigida no bioma do imóvel (Mata Atlântica)",
-        onto.reserva_legal("Mata Atlântica"),
+        "3) E se o sítio tiver uma nascente? Raio de APP",
+        onto.app_nascente(),
     )
 
-    # 4. O que o CAR regularizado desbloqueia
+    # 4. Reserva Legal — RJ está FORA da Amazônia Legal -> 20%
     bloco(
-        "4) Benefícios que o CAR ativo desbloqueia",
+        "4) Reserva Legal exigida (RJ está fora da Amazônia Legal)",
+        onto.reserva_legal(amazonia_legal=False),
+    )
+
+    # 5. O que o CAR regularizado desbloqueia
+    bloco(
+        "5) Benefícios que o CAR ativo desbloqueia",
         onto.beneficios(situacao_car="Ativo"),
     )
 
-    # Contraprova: outro bioma muda a regra (mostra que não é hard-coded)
+    # Contraprova: dentro da Amazônia Legal, área de floresta -> 80%
     bloco(
-        "CONTRAPROVA) Mesmo método, bioma Amazônia -> regra diferente",
-        onto.reserva_legal("Amazônia"),
+        "CONTRAPROVA) Mesmo imóvel, se fosse floresta na Amazônia Legal -> 80%",
+        onto.reserva_legal(amazonia_legal=True, tipo_vegetacao="floresta"),
     )
 
     print(f"\n{'='*70}")

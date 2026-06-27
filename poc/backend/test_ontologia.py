@@ -18,18 +18,26 @@ def test_app_hidrica_faixas():
     assert onto.app_hidrica(700)["faixa_protegida_m"] == 500   # > 600 m
 
 
-def test_reserva_legal_por_bioma():
-    # Art. 12 — percentual muda com o bioma (a contraprova de que não é hard-coded)
-    assert onto.reserva_legal("Mata Atlântica")["percentual_minimo"] == 20
-    assert onto.reserva_legal("Amazônia")["percentual_minimo"] == 80
-    assert onto.reserva_legal("Cerrado")["percentual_minimo"] == 35
+def test_reserva_legal_por_regiao():
+    # Art. 12 — percentual depende da REGIÃO, não do bioma isolado
+    # Fora da Amazônia Legal: sempre 20%
+    assert onto.reserva_legal(amazonia_legal=False)["percentual_minimo"] == 20
+    # Dentro da Amazônia Legal: varia por tipo de vegetação
+    assert onto.reserva_legal(amazonia_legal=True, tipo_vegetacao="floresta")["percentual_minimo"] == 80
+    assert onto.reserva_legal(amazonia_legal=True, tipo_vegetacao="cerrado")["percentual_minimo"] == 35
+    assert onto.reserva_legal(amazonia_legal=True, tipo_vegetacao="campos gerais")["percentual_minimo"] == 20
+
+
+def test_app_nascente():
+    # Art. 4, IV — raio mínimo de 50 m
+    assert onto.app_nascente()["raio_protegido_m"] == 50
 
 
 def test_toda_regra_tem_fonte_e_rastro():
     # P0-7: nenhuma resposta pode vir sem fonte legal + rastro no grafo
     r = onto.app_hidrica(8)
     assert r["fonte"] and r["rastro_ontologia"].startswith("car:")
-    r = onto.reserva_legal("Mata Atlântica")
+    r = onto.reserva_legal(amazonia_legal=False)
     assert r["fonte"] and r["rastro_ontologia"].startswith("car:")
 
 
@@ -49,7 +57,7 @@ def test_beneficios_car_ativo():
 
 
 def test_consulta_invalida_nao_quebra():
-    assert "erro" in onto.reserva_legal("Bioma Inexistente")
+    assert "erro" in onto.reserva_legal(amazonia_legal=True, tipo_vegetacao="inexistente")
     assert "erro" in onto.regra_para_pendencia("xpto")
 
 

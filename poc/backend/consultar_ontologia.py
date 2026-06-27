@@ -9,7 +9,8 @@ Uso:
     from consultar_ontologia import Ontologia
     onto = Ontologia()  # carrega ontologia/car.ttl
     onto.app_hidrica(largura_rio_m=8)
-    onto.reserva_legal("Mata Atlântica")
+    onto.app_nascente()
+    onto.reserva_legal(amazonia_legal=False)
     onto.regra_para_pendencia("CIB_ausente")
     onto.beneficios(situacao_car="Ativo")
 """
@@ -56,32 +57,65 @@ class Ontologia:
                 }
         return {"erro": f"Nenhuma faixa encontrada para largura {largura_rio_m} m"}
 
+    # ----- APP de nascente  (Lei 12.651/2012, Art. 4, IV) ----------------
+
+    def app_nascente(self) -> dict:
+        """Retorna o raio de proteção de nascente/olho d'água perene + fonte."""
+        for n in self.g.subjects(object=CAR.FaixaAPPNascente):
+            return {
+                "pergunta": "Qual o raio de APP de uma nascente?",
+                "raio_protegido_m": int(self.g.value(n, CAR.raioProtegidoMetros)),
+                "explicacao": self._str(n, RDFS.comment),
+                "fonte": self._str(n, DCTERMS.source),
+                "rastro_ontologia": self._rastro(n),
+            }
+        return {"erro": "Regra de APP de nascente não encontrada"}
+
     # ----- Reserva Legal  (Lei 12.651/2012, Art. 12) ---------------------
 
-    def reserva_legal(self, bioma_label: str) -> dict:
-        """Dado o bioma, retorna o percentual mínimo de RL + fonte."""
-        q = """
-        PREFIX car:  <https://terracomum.org/car#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX dct:  <http://purl.org/dc/terms/>
-        SELECT ?regra ?pct ?comentario ?fonte WHERE {
-            ?bioma rdfs:label ?blabel .
-            ?regra car:aplicaBioma ?bioma ;
-                   car:percentualMinimo ?pct ;
-                   rdfs:comment ?comentario ;
-                   dct:source ?fonte .
-            FILTER (LCASE(STR(?blabel)) = LCASE(?alvo))
-        }
-        """
-        for row in self.g.query(q, initBindings={"alvo": Literal(bioma_label)}):
+    def reserva_legal(self, amazonia_legal: bool, tipo_vegetacao: str = "floresta") -> dict:
+        """Percentual de RL depende da REGIÃO (Amazônia Legal) + tipo de vegetação.
+        Fora da Amazônia Legal é sempre 20%, qualquer que seja a vegetação."""
+        if amazonia_legal:
+            q = """
+            PREFIX car:  <https://terracomum.org/car#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dct:  <http://purl.org/dc/terms/>
+            SELECT ?regra ?pct ?comentario ?fonte WHERE {
+                ?regra car:amazoniaLegal true ;
+                       car:tipoVegetacao ?veg ;
+                       car:percentualMinimo ?pct ;
+                       rdfs:comment ?comentario ;
+                       dct:source ?fonte .
+                FILTER (LCASE(STR(?veg)) = LCASE(?alvo))
+            }
+            """
+            binding = {"alvo": Literal(tipo_vegetacao)}
+            contexto = f"Amazônia Legal, área de {tipo_vegetacao}"
+        else:
+            q = """
+            PREFIX car:  <https://terracomum.org/car#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX dct:  <http://purl.org/dc/terms/>
+            SELECT ?regra ?pct ?comentario ?fonte WHERE {
+                ?regra car:amazoniaLegal false ;
+                       car:percentualMinimo ?pct ;
+                       rdfs:comment ?comentario ;
+                       dct:source ?fonte .
+            }
+            """
+            binding = {}
+            contexto = "demais regiões do País (fora da Amazônia Legal)"
+
+        for row in self.g.query(q, initBindings=binding):
             return {
-                "pergunta": f"Qual o percentual de Reserva Legal em {bioma_label}?",
+                "pergunta": f"Qual o percentual de Reserva Legal — {contexto}?",
                 "percentual_minimo": int(row.pct),
                 "explicacao": str(row.comentario),
                 "fonte": str(row.fonte),
                 "rastro_ontologia": self._rastro(row.regra),
             }
-        return {"erro": f"Bioma '{bioma_label}' não mapeado na ontologia"}
+        return {"erro": f"Regra de RL não encontrada para {contexto}"}
 
     # ----- Pendências ----------------------------------------------------
 
