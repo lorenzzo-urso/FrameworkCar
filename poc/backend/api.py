@@ -13,6 +13,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from agent_hub import AgentHub
+from traduzir_llm import escolher_provedor
 
 app = FastAPI(
     title="Compadre / Terra Comum — PoC",
@@ -28,7 +29,11 @@ class ConversaIn(BaseModel):
 
 @app.get("/")
 def raiz():
-    return {"servico": "Compadre / Terra Comum", "agentes": [a["name"] for a in hub.listar()]}
+    return {
+        "servico": "Compadre / Terra Comum",
+        "provedor_llm": escolher_provedor(),
+        "agentes": [a["name"] for a in hub.listar()],
+    }
 
 
 @app.get("/agentes")

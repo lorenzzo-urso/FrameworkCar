@@ -4,6 +4,10 @@
 fastapi>=0.110          # API /conversa (P0-2)
 uvicorn[standard]>=0.29 # servidor ASGI para rodar a API
 rdflib>=7.0             # ontologia em Turtle / grafo do CAR (P0-4)
-anthropic>=0.40         # LLM de traducao (P0-5) — Claude Haiku 4.5
 pyyaml>=6.0             # ler o manifesto compadre.yaml (P0-1)
-python-dotenv>=1.0      # carregar ANTHROPIC_API_KEY do .env (nunca commitar o .env)
+python-dotenv>=1.0      # carregar as keys do .env (nunca commitar o .env)
+
+# Provedores de LLM (P0-5) — instale ao menos um; o codigo escolhe por env.
+# Sem nenhuma key configurada, o traduzir_llm cai num fallback de template.
+anthropic>=0.40         # Claude (LLM_PROVIDER=anthropic)
+openai>=1.40            # OpenAI (LLM_PROVIDER=openai)
