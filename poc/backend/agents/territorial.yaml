@@ -1,0 +1,27 @@
+# Manifesto do agente Territorial — VITRINE (P1-1).
+# Demonstra mais um consumidor da MESMA ontologia. Não executável no PoC.
+
+apiVersion: terracomum/v1
+kind: Agent
+
+metadata:
+  name: territorial
+  description: mostra déficit de Reserva Legal por município para o governo
+  persona_alvo: Gestor público (estado/município)
+
+spec:
+  ontology:
+    source: car.ttl
+    concepts: [ReservaLegal, Bioma]
+  tools:
+    - consultar_ontologia
+    - analise_espacial      # não registrada no PoC -> não operacional
+  policy:
+    rules:
+      - agregar déficit de RL por município
+      - priorizar áreas críticas para intervenção
+  output: painel_territorial
+
+  runtime:
+    protocol: ~
+    endpoint: ~

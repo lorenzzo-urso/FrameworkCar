@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terra Comum — Agent Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, "Segoe UI", sans-serif;
+      background: #0f1c18; color: #e8f3ee; min-height: 100vh; padding: 32px 20px;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; }
+    .cab { text-align: center; margin-bottom: 8px; }
+    .cab h1 { font-size: 26px; font-weight: 800; }
+    .cab h1 span { color: #2fd39a; }
+    .cab p { color: #93b3a8; font-size: 14px; margin-top: 6px; }
+
+    .base {
+      margin: 24px auto; max-width: 560px; text-align: center;
+      background: #16302a; border: 1px solid #245046; border-radius: 12px; padding: 14px;
+    }
+    .base b { color: #2fd39a; }
+    .base small { color: #84a89c; display: block; margin-top: 4px; }
+
+    .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 16px; margin-top: 20px; }
+    .card {
+      background: #16302a; border: 1px solid #245046; border-radius: 12px; padding: 16px;
+      transition: transform .15s, border-color .15s;
+    }
+    .card.ativo { border-color: #2fd39a; }
+    .card:hover { transform: translateY(-3px); }
+    .card h3 { font-size: 17px; display: flex; align-items: center; gap: 8px; }
+    .card .persona { color: #93b3a8; font-size: 12px; margin: 4px 0 10px; }
+    .pill {
+      font-size: 10px; padding: 2px 9px; border-radius: 10px; font-weight: 700;
+    }
+    .on  { background: #1f6f5c; color: #d8f0e4; }
+    .off { background: #3a3a3a; color: #bbb; }
+    .tools { margin-top: 10px; }
+    .tool { display: inline-block; background: #0f241f; color: #79c9ad; border: 1px solid #245046;
+      border-radius: 6px; padding: 2px 8px; font-size: 11px; margin: 3px 3px 0 0; font-family: ui-monospace, monospace; }
+    .abrir { display: inline-block; margin-top: 12px; background: #2fd39a; color: #08231b;
+      text-decoration: none; padding: 7px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; }
+    .nota { text-align: center; color: #6f9488; font-size: 12px; margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="cab">
+      <h1>Terra <span>Comum</span> — Agent Hub</h1>
+      <p>Uma camada semântica aberta. Múltiplos agentes. O mesmo conhecimento do território.</p>
+    </div>
+
+    <div class="base">
+      Todos os agentes raciocinam sobre a <b>mesma ontologia do CAR</b>
+      <small>backend/ontologia/car.ttl — regras do Código Florestal, rastreáveis</small>
+    </div>
+
+    <div class="grade" id="grade"></div>
+
+    <p class="nota">O Compadre é o primeiro agente. A plataforma é aberta: governo, cooperativas e
+    pesquisadores publicam os seus — todos sobre a mesma camada.</p>
+  </div>
+
+  <script>
+    const API = "http://127.0.0.1:8000/agentes";
+
+    // fallback (mesmo shape de GET /agentes) para a tela funcionar offline no pitch
+    const FALLBACK = [
+      { name: "compadre", description: "ajuda o produtor rural a entender e corrigir o CAR pelo WhatsApp",
+        persona: "Seu Raimundo (produtor)", tools: ["consultar_sicar","consultar_ontologia","traduzir_llm"], operacional: true },
+      { name: "auditor", description: "ajuda o analista do OEMA a checar pendências e gerar parecer",
+        persona: "Luana (analista ambiental)", tools: ["consultar_sicar","consultar_ontologia","analise_espacial"], operacional: false },
+      { name: "territorial", description: "déficit de Reserva Legal por município para o governo",
+        persona: "Gestor público", tools: ["consultar_ontologia","analise_espacial"], operacional: false },
+      { name: "credito", description: "carteira elegível a crédito verde para cooperativas",
+        persona: "Cooperativa de crédito", tools: ["consultar_ontologia","scoring"], operacional: false },
+    ];
+
+    const PERSONAS = { compadre: "Seu Raimundo (produtor)", auditor: "Luana (analista ambiental)",
+      territorial: "Gestor público", credito: "Cooperativa de crédito" };
+    const ICON = { compadre: "💬", auditor: "🔎", territorial: "🗺️", credito: "💰" };
+
+    function render(agentes) {
+      const grade = document.getElementById("grade");
+      grade.innerHTML = "";
+      for (const a of agentes) {
+        const card = document.createElement("div");
+        card.className = "card" + (a.operacional ? " ativo" : "");
+        const pill = a.operacional ? '<span class="pill on">ativo</span>' : '<span class="pill off">demonstrativo</span>';
+        const persona = a.persona || PERSONAS[a.name] || "";
+        const icon = ICON[a.name] || "🤖";
+        let tools = "";
+        for (const t of (a.tools||[])) tools += `<span class="tool">${t}</span>`;
+        const abrir = a.name === "compadre"
+          ? '<a class="abrir" href="index.html">Abrir o Compadre →</a>' : "";
+        card.innerHTML = `
+          <h3>${icon} ${a.name} ${pill}</h3>
+          <div class="persona">para: ${persona}</div>
+          <div>${a.description||""}</div>
+          <div class="tools">${tools}</div>
+          ${abrir}`;
+        grade.appendChild(card);
+      }
+    }
+
+    fetch(API).then(r => r.json()).then(render).catch(() => render(FALLBACK));
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# Manifesto do agente Crédito — VITRINE (P1-1).
+# Demonstra o consumidor B2B da MESMA ontologia. Não executável no PoC.
+
+apiVersion: terracomum/v1
+kind: Agent
+
+metadata:
+  name: credito
+  description: identifica carteira elegível a crédito verde para cooperativas
+  persona_alvo: Cooperativa de crédito / banco rural
+
+spec:
+  ontology:
+    source: car.ttl
+    concepts: [Pendencia, Beneficio]
+  tools:
+    - consultar_ontologia
+    - scoring               # não registrada no PoC -> não operacional
+  policy:
+    rules:
+      - cruzar regularidade do CAR com elegibilidade de crédito
+      - sinalizar risco e oportunidade de crédito verde
+  output: carteira_elegivel
+
+  runtime:
+    protocol: ~
+    endpoint: ~

@@ -10,6 +10,7 @@ Docs:   http://127.0.0.1:8000/docs
 """
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from agent_hub import AgentHub
@@ -19,6 +20,15 @@ app = FastAPI(
     title="Compadre / Terra Comum — PoC",
     description="Agente que traduz pendências do CAR raciocinando sobre a ontologia.",
 )
+
+# PoC: libera CORS para a interface web (poc/web/) chamar a API do navegador.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 hub = AgentHub()
 
 
