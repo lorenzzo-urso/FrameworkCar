@@ -1,0 +1,31 @@
+# Manifesto do agente Auditor — VITRINE (P1-1).
+# Demonstra que a plataforma hospeda N agentes sobre a MESMA ontologia.
+# Não é executável no PoC (só o Compadre roda) — existe para provar o padrão
+# "1 camada semântica -> N agentes -> N personas".
+
+apiVersion: terracomum/v1
+kind: Agent
+
+metadata:
+  name: auditor
+  description: ajuda o analista do OEMA a checar pendências e gerar parecer
+  persona_alvo: Analista ambiental (Luana)
+
+spec:
+  ontology:
+    source: car.ttl
+    concepts: [APP, ReservaLegal, Pendencia]
+  tools:
+    - consultar_sicar
+    - consultar_ontologia
+    - analise_espacial      # não registrada no PoC -> agente fica "não operacional"
+  policy:
+    rules:
+      - comparar uso declarado com a cobertura oficial
+      - identificar inconsistências de APP e RL
+      - gerar parecer técnico rastreável
+  output: parecer_tecnico
+
+  runtime:
+    protocol: ~
+    endpoint: ~
