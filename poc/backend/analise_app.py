@@ -105,5 +105,5 @@ if __name__ == "__main__":
     r = analisar_geometria_fixture()
     print(json.dumps(r, ensure_ascii=False, indent=2))
     if not r["conforme"]:
-        print(f"\n→ Déficit de {r['deficit_m2']} m² de mata ciliar "
+        print(f"\n>> Deficit de {r['deficit_m2']} m2 de mata ciliar "
               f"(a lei exige {r['faixa_exigida_m']} m; {r['fonte']}).")
