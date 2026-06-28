@@ -113,7 +113,7 @@ class AgentHub:
         except Exception:
             analise_app = None
 
-        traducao, proximo_passo = traduzir(dados, pendencias_out, beneficios)
+        traducao, proximo_passo = traduzir(dados, pendencias_out, beneficios, analise_app=analise_app)
 
         # P0-7: a regra aplicada, rastreável, sempre presente
         if regra_primaria:

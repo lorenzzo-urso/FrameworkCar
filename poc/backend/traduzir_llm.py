@@ -51,18 +51,29 @@ def escolher_provedor() -> str:
 
 # ----- prompt compartilhado ------------------------------------------------
 
-def _montar_prompt(dados, pendencias, beneficios) -> str:
+def _montar_prompt(dados, pendencias, beneficios, analise_app=None) -> str:
     contexto = {
         "imovel": dados.get("nome_imovel"),
         "pendencias": pendencias,
         "beneficios": beneficios,
+        "analise_app": analise_app,
     }
+    instrucao_app = ""
+    if analise_app and not analise_app.get("conforme"):
+        instrucao_app = (
+            "\n\nIMPORTANTE sobre a analise_app: essa é uma ESTIMATIVA calculada "
+            "com dados abertos (não é uma notificação oficial). Apresente como "
+            "observação — 'encontrei', 'calculei', 'pode estar' — nunca como "
+            "infração decretada. Sempre oriente a confirmar com técnico ou órgão "
+            "antes de tomar qualquer decisão."
+        )
     return (
         "Você é o Compadre, um assistente que ajuda o produtor rural a entender "
         "o CAR pelo WhatsApp. Fale simples, acolhedor, sem jargão. NUNCA invente "
         "regras ou números — use só o que está nos dados abaixo (eles vêm de uma "
-        "ontologia do Código Florestal, são confiáveis).\n\n"
-        f"DADOS:\n{json.dumps(contexto, ensure_ascii=False)}\n\n"
+        "ontologia do Código Florestal, são confiáveis)."
+        + instrucao_app
+        + f"\n\nDADOS:\n{json.dumps(contexto, ensure_ascii=False)}\n\n"
         "Responda APENAS um JSON com duas chaves: 'traducao' (2-3 frases explicando "
         "os avisos e o que fazer) e 'proximo_passo' (uma frase com a ação imediata)."
     )
@@ -103,41 +114,57 @@ def _call_openai(prompt: str) -> tuple[str, str]:
 
 # ----- fallback (sem rede) -------------------------------------------------
 
-def _fallback(dados, pendencias, beneficios) -> tuple[str, str]:
+def _fallback(dados, pendencias, beneficios, analise_app=None) -> tuple[str, str]:
     nome = dados.get("nome_imovel", "seu imóvel")
     n = len(pendencias)
+
+    # Parte 1: pendências do cadastro
     if n == 0:
-        return (f"Boa notícia! O {nome} não está com pendências no momento.",
-                "Mantenha o cadastro atualizado.")
-
-    p0 = pendencias[0]
-    plural = "avisos" if n > 1 else "aviso"
-    traducao = (
-        f"Olá! Dei uma olhada no {nome} e ele está com {n} {plural}. "
-        f"O mais simples de resolver: {p0['explicacao']} "
-        f"O que fazer: {p0['o_que_fazer']}"
-    )
-    if beneficios:
-        lista = ", ".join(beneficios[:2])
-        traducao += f" Assim que estiver tudo certo, o CAR em dia te dá acesso a: {lista}."
-
-    if n > 1:
-        proximo = f"Vamos resolver primeiro: {p0['tipo']}. Depois cuidamos do resto."
+        traducao = f"Boa notícia! O {nome} não está com pendências de cadastro no momento."
+        proximo = "Mantenha o cadastro atualizado."
     else:
-        proximo = f"Próximo passo: {p0['o_que_fazer']}"
+        p0 = pendencias[0]
+        plural = "avisos" if n > 1 else "aviso"
+        traducao = (
+            f"Olá! Dei uma olhada no {nome} e ele está com {n} {plural} no cadastro. "
+            f"O mais simples de resolver: {p0['explicacao']} "
+            f"O que fazer: {p0['o_que_fazer']}"
+        )
+        if beneficios:
+            lista = ", ".join(beneficios[:2])
+            traducao += f" Assim que estiver tudo certo, o CAR em dia te dá acesso a: {lista}."
+        proximo = (
+            f"Vamos resolver primeiro: {p0['tipo']}. Depois cuidamos do resto."
+            if n > 1 else f"Próximo passo: {p0['o_que_fazer']}"
+        )
+
+    # Parte 2: análise de APP (evidência separada da interpretação)
+    if analise_app and not analise_app.get("conforme"):
+        deficit_ha = analise_app.get("deficit_ha", 0)
+        faixa = analise_app.get("faixa_exigida_m", 30)
+        fonte = analise_app.get("fonte", "Código Florestal")
+        traducao += (
+            f" Também fiz um cálculo com os dados abertos da sua região: "
+            f"a área de mata perto do curso d'água pode estar com uns {deficit_ha:.2f} ha "
+            f"a menos do que a lei pede — a faixa exigida é de {faixa} m ({fonte}). "
+            f"Isso é uma estimativa minha, não uma notificação oficial. "
+            f"Vale confirmar com um técnico ou a EMATER antes de tomar qualquer decisão."
+        )
+
     return traducao, proximo
 
 
 # ----- entrada pública -----------------------------------------------------
 
-def traduzir(dados: dict, pendencias: list, beneficios: list) -> tuple[str, str]:
+def traduzir(dados: dict, pendencias: list, beneficios: list,
+             analise_app: dict | None = None) -> tuple[str, str]:
     """Retorna (traducao, proximo_passo). Escolhe o provider e, em qualquer
     falha de rede/parse, cai no template — o demo nunca quebra."""
     provedor = escolher_provedor()
     if provedor == "fallback":
-        return _fallback(dados, pendencias, beneficios)
+        return _fallback(dados, pendencias, beneficios, analise_app)
 
-    prompt = _montar_prompt(dados, pendencias, beneficios)
+    prompt = _montar_prompt(dados, pendencias, beneficios, analise_app)
     try:
         if provedor == "anthropic":
             return _call_anthropic(prompt)
@@ -145,4 +172,4 @@ def traduzir(dados: dict, pendencias: list, beneficios: list) -> tuple[str, str]
             return _call_openai(prompt)
     except Exception:
         pass
-    return _fallback(dados, pendencias, beneficios)
+    return _fallback(dados, pendencias, beneficios, analise_app)
