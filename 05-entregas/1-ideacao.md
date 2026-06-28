@@ -1,98 +1,109 @@
 # Entrega 1 — Ideação (rascunho final, 10 campos)
 
-> Gerado pela skill `hacarthon-entrega-ideacao`. Cada campo tem versão curta e
-> expandida. **Reescrever com as palavras do time antes de colar na plataforma**,
-> especialmente os campos 1 e 10.
+> Gerado pela skill `hacarthon-entrega-ideacao` — estado do projeto em 27/jun/2026.
+> Incorpora: 5 produtores reais entrevistados, análise P0-8 com dado real de MG
+> (Alvinópolis, 4,19 ha de déficit), Agent Hub rodando com manifesto YAML,
+> princípio evidência/interpretação implementado.
 >
 > ⚠️ O formulário exige que as respostas reflitam o entendimento da equipe —
-> use estes rascunhos como ponto de partida, não como texto final.
+> **reescreva com as palavras do time antes de colar na plataforma**,
+> especialmente os campos 1 e 10.
 
 ---
 
 ## Campo 1 — BRAINSTORM
 
 **Versão curta**
-O time partiu de 3 direções: app para o produtor, painel para o governo e
-infraestrutura de dados. A ideia que venceu uniu as três — o Compadre como
-prova e a Terra Comum como plataforma — porque era a única que resolvia o
-individual e o coletivo ao mesmo tempo.
+O time partiu de três direções: assistente para o produtor, painel para o governo e
+infraestrutura de dados abertos. A ideia que venceu foi a única que resolvia o
+individual e o coletivo ao mesmo tempo — o Compadre como prova, a Terra Comum como
+plataforma. Ganhou porque não termina num produto fechado: é a estrada, não o táxi.
 
 **Versão expandida**
-No início do haCARthon, exploramos caminhos distintos: um assistente simples
-para o produtor, um painel analítico para os órgãos ambientais e uma camada de
-integração de dados abertos. Cada ideia resolvia parte do problema — mas nenhuma
-resolvia o Desafio 1 por inteiro, que pede explicitamente "benefícios individuais
-e coletivos". A virada veio quando percebemos que o problema não é falta de dados
-— é falta de contexto e tradução. Os dados existem (SIGEF, MapBiomas, base SFB,
-RER), mas estão fragmentados e escritos numa linguagem que o Seu Raimundo não
-consegue usar. A solução escolhida foi a única que atacava os três gargalos ao
-mesmo tempo: o Compadre (o assistente pelo WhatsApp, que o produtor vê) sobre a
-Terra Comum (a camada semântica aberta, que o jurado ouve no pitch). Venceu
-porque é a única resposta que não termina num produto fechado para uma persona
-— é infraestrutura que multiplica.
+No início do haCARthon exploramos caminhos distintos: um assistente conversacional
+simples para o produtor, um painel analítico para os órgãos ambientais e uma camada
+de integração de dados abertos. Cada ideia resolvia parte do Desafio 1 — mas nenhuma
+resolvia o requisito explícito de "benefícios individuais e coletivos" ao mesmo tempo.
+A virada veio quando percebemos que o problema não é falta de dados — SIGEF,
+MapBiomas, Base SFB e RER já existem e são públicos. O problema é falta de contexto:
+os dados estão fragmentados e escritos numa linguagem que o Seu Raimundo não consegue
+usar. A solução escolhida foi a única que atacava os três gargalos ao mesmo tempo e
+não terminava num app para uma persona só. O Compadre (o que o produtor vê no
+WhatsApp) sobre a Terra Comum (a camada semântica aberta que qualquer agente pode
+consumir). Venceu porque multiplica — uma estrada serve qualquer veículo.
 
-> ⚠️ **Reescrever com o que realmente aconteceu:** um momento de virada, uma
-> ideia descartada, quem sugeriu o quê. Isso é o que diferencia do genérico.
+> ⚠️ **Reescrever com o que realmente aconteceu:** um momento de virada, uma ideia
+> descartada pelo time, quem sugeriu o quê. Esse é o campo mais humano do formulário
+> — os avaliadores usam para calibrar autenticidade.
 
-`[Jurado] Critério: autenticidade + pertinência | Nota estimada: 8/10 | Para subir: incluir detalhe real — nome de ideia descartada, momento de virada`
+`[Jurado] Critério: autenticidade + pertinência | Nota est.: 8/10 | Para subir: incluir 1 ideia descartada com nome e o momento real de virada na discussão`
 
 ---
 
 ## Campo 2 — PROBLEMA
 
 **Versão curta**
-O Seu Raimundo recebe uma notificação do governo sobre a terra dele e não
-entende uma palavra. Tem medo de multa, guarda o papel na gaveta e paga um
-técnico para resolver. Enquanto isso, o crédito rural fica bloqueado. Com 8,2
-milhões de imóveis no CAR, esse ciclo se repete em escala nacional.
+O Seu Raimundo recebe uma notificação do órgão ambiental em linguagem técnica, não
+entende uma palavra, tem medo de multa e paga técnico para resolver. O crédito rural
+fica bloqueado. Validamos isso com 5 produtores reais: WhatsApp como principal
+ferramenta em todos os 5 casos; 4 em 5 pagaram técnico ou consultor; 2 em 5 gastaram
+mais de 5 horas só no processo do CAR.
 
 **Versão expandida**
-O CAR é pré-requisito para crédito rural, acesso a PSA, isenção fiscal e
-suspensão de sanções ambientais — mas o processo de declaração e correção é
-inacessível para o pequeno produtor. O Seu Raimundo recebe notificações do órgão
-ambiental em linguagem técnica ("sobreposição de polígono em área de APP,
-necessária retificação cadastral") e não entende o que fazer. O medo de multa
-paralisa. A solução que encontra é pagar um técnico — que cobra e demora. O ciclo
-de retificações se repete infinitamente porque o dado autodeclarado erra, o órgão
-rejeita, o produtor não sabe corrigir. São três gargalos sobrepostos: exclusão
-digital e técnica (o produtor não consegue georreferenciar APP e Reserva Legal
-sozinho), ciclo infinito de retificações (vai-e-vem com os OEMAs), e ruído na
-comunicação Estado-produtor (a notificação técnica gera medo em vez de
-orientação). O problema é urgente: o CAR irregular bloqueia acesso ao Pronaf, ao
-Programa de Regularização Ambiental e à CRA — e a raiz não é falta de informação,
-é falta de contexto e tradução.
+O CAR é pré-requisito para crédito rural, PSA, isenção fiscal e suspensão de sanções
+ambientais — mas o processo de declaração e correção é inacessível para o pequeno
+produtor. A raiz não é falta de acesso ao sistema: é falta de contexto e tradução.
+Quando a notificação do órgão diz "sobreposição de polígono em área de APP,
+necessária retificação cadastral", o Seu Raimundo guarda o papel na gaveta. O medo
+de multa paralisa; a solução que encontra é pagar técnico — que cobra e demora. O
+ciclo de retificações se repete porque o dado autodeclarado erra, o órgão rejeita, o
+produtor não sabe corrigir. Validamos esse padrão com 5 produtores reais de SP, RS,
+BA e MG: WhatsApp como principal ferramenta digital em todos os 5 casos; 4 em 5
+pagaram técnico ou consultor; 2 em 5 gastaram mais de 5 horas no processo do CAR;
+"falta de informação" foi a barreira mais citada. São três gargalos sobrepostos:
+exclusão digital e técnica (não consegue georreferenciar APP e Reserva Legal
+sozinho), ciclo de retificações infinitas (vai-e-vem com os OEMAs) e ruído na
+comunicação Estado-produtor (notificação técnica gera medo em vez de orientação).
+Com 8,2 milhões de imóveis no CAR e estimativa de 30–40% com análise pendente ou
+com erro, o problema opera em escala nacional.
 
-`[Jurado] Critério: Relevância do problema | Nota estimada: 8/10 | Para subir: incluir % de CARs com análise pendente — buscar no Painel de Regularização Ambiental`
+`[Jurado] Critério: Relevância do problema | Nota est.: 9/10 | Para subir: confirmar % oficial de CARs com análise pendente no Painel de Regularização Ambiental`
 
 ---
 
 ## Campo 3 — SOLUÇÃO
 
 **Versão curta**
-O Compadre é um assistente pelo WhatsApp que traduz as notificações do CAR em
-linguagem simples, prepara o produtor para cada etapa e abre o link direto na
-tela certa do sistema. Por trás, a Terra Comum — camada semântica aberta que usa
-as mesmas bases de dados que o analista usa para validar.
+O Compadre traduz notificações do CAR em português simples pelo WhatsApp e prepara
+o produtor para cada etapa — usando as mesmas bases de dados que o analista usa para
+validar. Por trás, a Terra Comum calcula o próprio diagnóstico: já detectou 4,19 ha
+de déficit de mata ciliar em imóvel real de MG, com a regra legal rastreável — sem
+precisar de autenticação no SICAR.
 
 **Versão expandida**
-A solução tem duas faces que trabalham juntas. O **Compadre** é o que o produtor
-vê: um assistente no WhatsApp que lê a notificação do órgão, traduz em português
-simples ("tem uma diferença na área perto do seu rio"), explica o que falta, e
-abre o link direto na etapa certa do sistema — sem que o Raimundo precise entender
-o SICAR. Ele não substitui o sistema oficial: fica na frente dele, preparando o
-produtor para chegar pronto. A **Terra Comum** é o motor invisível: uma camada
-semântica aberta construída sobre o RER open-source do governo, que integra SIGEF
-(limites oficiais do imóvel), MapBiomas (cobertura e uso do solo), e a Base de
-Referência de Uso do Solo do SFB — a mesma base que os analistas dos OEMAs usam
-para validar o CAR. Ao usar a mesma base de referência nas duas pontas (produção
-e validação), eliminamos a divergência que causa o ciclo de retificações. O
-produtor não vê a máquina — só recebe a resposta na língua dele.
+A solução tem duas faces. O **Compadre** é o que o produtor vê: um assistente no
+WhatsApp que lê a notificação do órgão, traduz em linguagem simples ("tem uma
+diferença na área perto do seu rio"), explica o que falta e abre o link direto na
+etapa certa do sistema. Não substitui o SICAR — fica na frente dele, preparando o
+produtor para chegar pronto. A **Terra Comum** é o motor invisível: camada semântica
+aberta construída sobre o RER open-source do governo, integrando SIGEF, MapBiomas e
+a Base de Referência de Uso do Solo do SFB — a mesma base que os analistas dos
+OEMAs usam para validar. Ao usar a mesma base de referência nas duas pontas
+(produção e validação), eliminamos a divergência que causa o ciclo de retificações.
+
+O diferencial técnico que mais importa: a Terra Comum **descobre** o problema, não
+apenas repete o que o governo aponta. Já demonstramos com dado real: sobre o
+GeoPackage SFB de Minas Gerais, o sistema calculou automaticamente um déficit de
+4,19 ha de mata ciliar em imóvel real de Alvinópolis/MG — citando a regra legal
+exata (Lei 12.651/2012, Art. 4º, I, alínea a) com rastro da ontologia. Tudo isso
+sem nenhuma autenticação no SICAR. O produtor não vê a máquina; só recebe a
+resposta na língua dele.
 
 > **No vídeo, o jurado verá:** o Seu Raimundo mandando uma notificação do órgão
 > pro Compadre no WhatsApp, recebendo a tradução em português simples, entendendo
 > o que falta e sendo direcionado para a etapa certa do sistema.
 
-`[Jurado] Critério: Pertinência + Inovação | Nota estimada: 9/10 | Para subir: mostrar no vídeo a cena exata de "tradução da notificação"`
+`[Jurado] Critério: Pertinência + Inovação | Nota est.: 9/10 | Para subir: mostrar no vídeo a cena exata de tradução da notificação + o resultado do diagnóstico próprio ("encontrei isso na sua área")`
 
 ---
 
@@ -101,53 +112,61 @@ produtor não vê a máquina — só recebe a resposta na língua dele.
 **Versão curta**
 Pequenos e médios produtores rurais — o Seu Raimundo — que usam WhatsApp como
 principal ferramenta digital e dependem de extensionistas (CATI/EMATER) para
-assuntos ambientais. Escolhemos esse público porque é o mais vulnerável, o menos
-atendido e onde o impacto de uma solução simples é maior.
+assuntos ambientais. Confirmado com 5 produtores reais de 4 estados: WhatsApp
+presente em todos os 5 casos. O canal de distribuição é o extensionista, não o
+governo direto.
 
 **Versão expandida**
 O público primário são pequenos e médios produtores rurais — o Seu Raimundo do
 Briefing. Ele depende da propriedade para o sustento familiar, não tem domínio de
-plataformas digitais, e toma decisões com base na confiança: vizinhos, sindicatos,
-extensionistas agrícolas. WhatsApp é o seu canal principal — funciona em 2G, não
-exige download, e já faz parte da rotina. Validamos esse perfil com um produtor
-real de SP: a maior barreira não é a plataforma do SICAR, é entender o que a
-regra pede. Escolhemos esse público porque é onde a mudança tem mais impacto:
-cada retificação eliminada na origem reduz o retrabalho nos órgãos e libera o
-acesso a benefícios que o produtor nem sabe que tem direito. O canal de
-distribuição não é governo direto — é o extensionista (CATI, EMATER) e a
-cooperativa, que o Raimundo já confia e que têm capilaridade nacional. Benefício
-indireto: analistas dos OEMAs, que recebem cadastros mais limpos e com menos
-retrabalho.
+plataformas digitais e toma decisões com base na confiança: vizinhos, sindicatos,
+extensionistas agrícolas, gerentes de banco. Validamos esse perfil com 5 produtores
+reais de SP, RS, BA e MG (agrofloresta, orgânicos, silvicultura, café): WhatsApp
+como principal ferramenta digital em todos os 5; "falta de informação" como
+principal barreira em 4 de 5; 4 em 5 pagaram técnico para fazer o CAR. A principal
+barreira não é a plataforma — é entender o que a regra pede e ter segurança de estar
+fazendo certo.
 
-`[Jurado] Critério: Relevância | Nota estimada: 8/10 | Para subir: número de produtores rurais que usam WhatsApp vs. que já acessaram o SICAR`
+Escolhemos esse público porque é onde a mudança tem mais impacto: cada retificação
+eliminada na origem reduz o retrabalho nos órgãos e libera benefícios que o produtor
+nem sabe que tem direito. O canal de distribuição não é governo direto — é o
+extensionista (CATI, EMATER) e a cooperativa, que o Raimundo já confia e que têm
+capilaridade nacional. Benefício indireto imediato: analistas dos OEMAs, que
+recebem cadastros mais limpos, com a mesma base de referência — menos ciclos de
+retificação.
+
+`[Jurado] Critério: Relevância | Nota est.: 9/10 | Para subir: dado de % de produtores rurais que usam WhatsApp vs. que acessaram o SICAR ao menos uma vez`
 
 ---
 
 ## Campo 5 — IMPACTO
 
 **Versão curta**
-Individual: o Raimundo entende o que fazer, corrige sem pagar despachante, e
-descobre que o CAR regularizado desbloqueia crédito e PSA. Coletivo: cada CAR
-correto na origem reduz retificações nos órgãos, melhora a base nacional e a
-mesma plataforma aberta serve governo e cooperativas.
+Individual: o Raimundo entende o que fazer, corrige sem pagar técnico e descobre
+que o CAR regularizado desbloqueia crédito e PSA. Coletivo: cada CAR correto na
+origem reduz um ciclo de retificação nos órgãos, e a plataforma aberta multiplica
+o impacto — governo, cooperativas e pesquisadores constroem agentes na mesma camada.
 
 **Versão expandida**
-**Impacto individual (Seu Raimundo):** entende o que a notificação pede sem medo;
-corrige o CAR sem pagar técnico; chega no sistema oficial preparado, com os dados
-certos em mãos; descobre os benefícios que o CAR regularizado desbloqueia —
-Pronaf Eco, PSA, CRA, suspensão de sanções. O CAR deixa de ser ameaça e vira
-porta de oportunidade.
+**Impacto individual (Seu Raimundo):** entende o que a notificação pede sem medo,
+porque o Compadre distingue o que encontrou nos dados do que isso significa — sem
+decretar infração. Corrige o CAR sem pagar técnico. Chega ao sistema preparado,
+com os dados certos. Descobre os benefícios que o CAR regularizado desbloqueia:
+Pronaf Eco, PSA, CRA, suspensão de sanções. O CAR deixa de ser ameaça e vira porta
+de oportunidade. Prova técnica já construída: o sistema detectou 4,19 ha de déficit
+de mata ciliar em imóvel real de MG, com a regra legal citada e rastro rastreável —
+antes de qualquer notificação do governo.
 
 **Impacto coletivo (sistema):** cada CAR correto na origem elimina um ciclo de
 retificação — menos retrabalho para os analistas dos OEMAs, dados mais confiáveis
-na base nacional, melhor conformidade com o Código Florestal. E porque a Terra
-Comum é uma plataforma aberta (Bem Público Digital), o impacto se multiplica:
-governo usa a mesma camada para priorizar intervenção territorial; cooperativas de
-crédito qualificam carteiras de crédito verde; pesquisadores e Embrapa constroem
-agentes especializados. Uma única arquitetura resolve o individual e o coletivo —
-que é exatamente o que o Desafio 1 pede.
+na base nacional, melhor conformidade com o Código Florestal. Como a Terra Comum é
+uma plataforma aberta (Bem Público Digital), o impacto se multiplica: governo usa a
+mesma camada para priorizar intervenção territorial; cooperativas de crédito
+qualificam carteiras de crédito verde; pesquisadores e Embrapa constroem agentes
+especializados sobre o mesmo conhecimento. Uma única arquitetura resolve o individual
+e o coletivo — que é exatamente o que o Desafio 1 pede.
 
-`[Jurado] Critério: Pertinência (individual + coletivo é requisito explícito) | Nota estimada: 9/10 | Para subir: métrica de baseline — tempo médio atual de uma retificação no SICAR`
+`[Jurado] Critério: Pertinência (individual + coletivo é requisito explícito do enunciado) | Nota est.: 9/10 | Para subir: métrica de baseline — tempo médio atual de uma retificação no SICAR`
 
 ---
 
@@ -155,124 +174,137 @@ que é exatamente o que o Desafio 1 pede.
 
 **Versão curta**
 Outros times estão construindo um táxi. Nós estamos construindo a estrada. O
-Compadre é a prova; a Terra Comum é o protocolo aberto para que qualquer agente
-— de qualquer organização — entenda o território rural brasileiro.
+Compadre é a prova; a Terra Comum é o protocolo aberto. Quatro diferenciais
+verificáveis: raciocina sobre ontologia (não sobre texto), descobre o problema em
+vez de raspá-lo, serve N personas com 1 camada, e é construído sobre a mesma
+infraestrutura do governo.
 
 **Versão expandida**
 A resposta óbvia ao Desafio 1 é um chatbot que ajuda o Raimundo. Essa resposta
 existe — e outros times vão entregá-la. Nós entregamos outra coisa: o substrato
-aberto para que qualquer agente entenda o território rural. Hoje o produtor acessa
-o SICAR sozinho (ou paga técnico), recebe uma notificação técnica, não entende, e
-entra no ciclo de retificações. Os assistentes que existem adivinham em cima de
-texto — sem rastreabilidade, sem consistência, e servindo só uma persona. O
-diferencial da Terra Comum é em três camadas: (1) **Protocolo, não produto** —
-uma camada semântica → múltiplos agentes → múltiplas personas. O mesmo
-conhecimento serve o Compadre (produtor), o Auditor (analista do OEMA), o
-Territorial (governo) e o Crédito (cooperativa). Benefícios individuais e
-coletivos em uma única arquitetura. (2) **Raciocina sobre ontologia, não sobre
-texto** — não é RAG. Explica o porquê, com rastreabilidade. Não existe
-implementação pública de ontologia para o CAR — somos os primeiros. (3) **Sobre
-a mesma infraestrutura do governo** — RER open-source e base de referência SFB.
-Não recriamos do zero: ampliamos com inteligência o que já existe e é de todos.
+aberto para que qualquer agente entenda o território rural. O diferencial em quatro
+camadas verificáveis:
 
-`[Jurado] Critério: Inovação ⭐ (desempate) | Nota estimada: 9/10 | Para subir: citar o Auditor do OEMA como segundo agente — prova que a plataforma é real, não só promessa`
+**(1) Raciocina sobre ontologia, não sobre texto.** Não é RAG. A resposta cita a
+regra concreta que veio do grafo — "faixa de 30m, para rios com menos de 10m de
+largura, Lei 12.651/2012, Art. 4º, I, a" — com rastro da ontologia. Quando a lei
+muda, muda-se um nó; todos os agentes ficam corretos automaticamente. Não existe
+implementação pública de ontologia para o CAR — somos os primeiros.
+
+**(2) Descobre o problema, não o raspa.** Em vez de perguntar ao governo "o produtor
+tem pendência?", a Terra Comum calcula o diagnóstico com dado aberto, sem
+autenticação. Já demonstramos: déficit de 4,19 ha de mata ciliar detectado em imóvel
+real de Alvinópolis/MG, a partir do GeoPackage SFB, sem login no SICAR.
+
+**(3) Protocolo, não produto.** Uma camada semântica → múltiplos agentes → múltiplas
+personas. O mesmo conhecimento serve o Compadre (produtor), o Auditor (OEMA), o
+Territorial (governo) e o Crédito (cooperativa). Benefícios individuais e coletivos
+em uma única arquitetura.
+
+**(4) Sobre a infraestrutura do governo.** Construído sobre o RER open-source e a
+Base SFB — não recriamos do zero, ampliamos com inteligência o que já é de todos.
+
+`[Jurado] Critério: Inovação ⭐ (desempate) | Nota est.: 9/10 | Para subir: o diferencial (2) — "4,19 ha detectado em imóvel real de MG" — é o mais concreto e o menos dito; usar esse número sem jargão`
 
 ---
 
 ## Campo 7 — VIABILIDADE
 
 **Versão curta**
-Legal: código aberto, dados com licença CC, construído sobre o RER (DPG do
-governo). Tecnológico: SIGEF, MapBiomas e base SFB já são públicos; RER roda em
-Docker. Operacional: WhatsApp já é o canal do produtor; CATI/EMATER têm
-capilaridade nacional.
+Legal: código aberto, dados CC, construído sobre o RER (DPG do governo). Tecnológico:
+SIGEF, MapBiomas e Base SFB públicos e já integrados — GeoPackage de MG baixado e
+rodando, análise de déficit funcionando. RER sobe em Docker. Operacional: WhatsApp é
+o canal do produtor (5/5 na pesquisa); CATI/EMATER têm capilaridade nacional.
 
 **Versão expandida**
-**Legal:** a solução é código aberto (exigência do edital atendida). Usa bases
-públicas com licença Creative Commons (base SFB, MapBiomas). Construída sobre o
-RER, que é Bem Público Digital do governo federal — não há conflito de propriedade
-intelectual.
+**Legal:** solução código aberto (exigência do edital atendida). Usa bases públicas
+com licença Creative Commons (Base SFB, MapBiomas). Construída sobre o RER, Bem
+Público Digital do governo federal — sem conflito de propriedade intelectual.
 
-**Tecnológico:** todas as bases já existem e são acessíveis — SIGEF com API
-pública, MapBiomas com dados históricos por estado, Base de Referência de Uso do
-Solo do SFB (1,84 GB para AL, baixada e validada pela equipe), RER self-hostável
-via Docker com REST API. A camada semântica usa LLM comercial disponível.
-WhatsApp Business API disponível para aprovação no piloto. No hackathon:
-demonstramos com interface navegável real e dados do ambiente de testes oficial
-do SICAR (car-sus.dataprev.gov.br), com imóvel de teste do sistema do governo.
+**Tecnológico:** todas as bases já existem, são públicas e já foram integradas.
+SIGEF com API pública. MapBiomas com dados históricos por estado. Base de Referência
+de Uso do Solo do SFB: GeoPackage de MG (MG_CAR_Uso_Cobertura_Solo.gpkg) baixado,
+processado e rodando — o sistema já calcula déficit de APP sobre dado real. RER
+self-hostável via Docker com REST API. Camada semântica usando LLM comercial
+disponível. Interface navegável real funcionando. Demo com imóvel do ambiente de
+testes oficial do SICAR (car-sus.dataprev.gov.br).
 
-**Operacional:** o canal CATI/EMATER tem capilaridade nacional e já é o elo de
-confiança do produtor. O módulo pré-preenchido do SICAR prova que o governo já
+**Operacional:** canal CATI/EMATER com capilaridade nacional e já é o elo de
+confiança do produtor (confirmado: 4 em 5 produtores entrevistados recorrem a
+extensionista ou técnico). O módulo pré-preenchido do SICAR prova que o governo já
 faz o cruzamento de dados que a solução usa — entregamos pelo canal certo.
 
-`[Jurado] Critério: Pertinência + Inovação | Nota estimada: 8/10 | Para subir: confirmar parceiro do piloto [A CONFIRMAR — CATI ou cooperativa]`
+`[Jurado] Critério: Pertinência + Inovação | Nota est.: 9/10 | Para subir: confirmar parceiro do piloto [A CONFIRMAR — CATI-SP ou cooperativa]`
 
 ---
 
 ## Campo 8 — IMPLEMENTAÇÃO
 
 **Versão curta**
-Hackathon: protótipo navegável do Compadre com imóvel real de teste. Piloto
-(3–6 meses): Terra Comum sobre RER real + WhatsApp Business + parceiro CATI ou
-cooperativa. Escala (12–24 meses): integração com CAR nacional e Agent Hub aberto
-a terceiros.
+Hackathon: PoC com fluxo real de tradução, ontologia do CAR, análise de déficit com
+dado real de MG e Agent Hub carregando o Compadre por manifesto. Piloto (3–6 meses):
+Terra Comum sobre RER real + WhatsApp Business + parceiro CATI ou cooperativa.
+Escala (12–24 meses): integração CAR nacional e Agent Hub aberto a terceiros.
 
 **Versão expandida**
-**Hackathon (agora — 2,5 dias):** interface navegável simulando WhatsApp, com
-fluxo real de tradução de pendência usando imóvel do ambiente de testes oficial
-do SICAR; ontologia mínima do CAR (APP, RL, biomas, parâmetros do Código
-Florestal); dados da Base SFB de Alagoas pré-computados; arquitetura da Terra
-Comum apresentada como diagrama no pitch.
+**Hackathon (construído em 2,5 dias):** interface navegável simulando WhatsApp com
+fluxo real de tradução de pendência; ontologia mínima do CAR (APP, RL, biomas,
+parâmetros do Código Florestal) em Turtle RDF; Agent Hub carregando o Compadre por
+manifesto YAML — trocar o manifesto muda o agente sem mexer no código; análise de
+déficit de APP rodando sobre dado real (GeoPackage SFB de MG, déficit de 4,19 ha
+detectado em imóvel de Alvinópolis/MG com regra legal rastreável); separação
+evidência/interpretação implementada na resposta do agente; demo com imóvel do
+ambiente de testes oficial do SICAR.
 
-**Piloto (3–6 meses):** Terra Comum sobre instância própria do RER com dados
-reais; integração SIGEF + MapBiomas + base SFB por estado; WhatsApp Business API
-com aprovação Meta; 1–2 agentes funcionais (Compadre + Auditor); parceria com
-extensionista ou cooperativa para chegada ao produtor `[parceiro a confirmar]`.
+**Piloto (3–6 meses):** Terra Comum sobre instância própria do RER com dados reais;
+integração SIGEF + MapBiomas + Base SFB por estado; WhatsApp Business API com
+aprovação Meta; 2 agentes funcionais (Compadre + Auditor); parceria com extensionista
+ou cooperativa para chegada ao produtor `[parceiro a confirmar]`.
 
-**Escala (12–24 meses):** integração com o CAR nacional; Agent Hub aberto —
-qualquer dev ou órgão publica agentes; primeiras assinaturas B2B (cooperativas
-de crédito) e B2G (estados). A ontologia evolui como commons mantida pela
-comunidade.
+**Escala (12–24 meses):** integração com CAR nacional; Agent Hub aberto — qualquer
+dev ou órgão publica agentes; primeiras assinaturas B2B (cooperativas de crédito) e
+B2G (estados). A ontologia evolui como commons mantida pela comunidade.
 
-`[Jurado] Critério: Relevância | Nota estimada: 8/10 | Para subir: nomear o parceiro do piloto`
+`[Jurado] Critério: Relevância | Nota est.: 9/10 | Para subir: nomear o parceiro do piloto`
 
 ---
 
 ## Campo 9 — CÓDIGO ABERTO
 
 **Versão curta**
-A Terra Comum é DPG por design: ontologia + camada semântica + Agent Hub
-publicados no GitHub com licença aberta. Qualquer estado ou país que use o RER
-pode rodar a Terra Comum em cima. É o Android do domínio CAR — qualquer um
-publica agentes na mesma plataforma.
+A Terra Comum é DPG por design: ontologia + camada semântica + Agent Hub publicados
+no GitHub com licença aberta. Qualquer estado ou país que use o RER pode rodar em
+cima. É o Android do domínio CAR — qualquer um publica agentes na mesma plataforma,
+partindo do mesmo conhecimento base.
 
 **Versão expandida**
-A Terra Comum não é um app que pode ser compartilhado — é infraestrutura que foi
-desenhada para ser pública desde o primeiro dia. O núcleo (ontologia + camada
-semântica + Agent Hub) será publicado no GitHub com licença Apache 2.0. Qualquer
-estado brasileiro que queira adaptar a solução ao seu contexto pode fazer isso;
-qualquer país com legislação ambiental similar pode criar a ontologia do seu
-código florestal e reutilizar o mesmo Agent Hub. A ontologia será alinhada ao
-AGROVOC (vocabulário agrícola da FAO) e às bases da Embrapa (OntoAgroHidro,
-Agrotermos) — facilitando reutilização internacional e colaboração com
-instituições já reconhecidas. O efeito-rede é estrutural: quanto mais organizações
-contribuem com agentes e dados, melhor o modelo para todos — o incentivo à adoção
-está na arquitetura. É o "Android do domínio CAR": qualquer desenvolvedor, órgão
-ou pesquisador publica agentes na mesma plataforma e parte do mesmo conhecimento
-base. Construído sobre o RER — que é ele mesmo um Bem Público Digital — a Terra
-Comum é a camada de inteligência que o RER não tem, e que qualquer instância do
-RER no mundo pode adotar.
+A Terra Comum não é um app que pode ser compartilhado — é infraestrutura desenhada
+para ser pública desde o primeiro dia. O núcleo (ontologia + camada semântica + Agent
+Hub) será publicado no GitHub com licença Apache 2.0. Qualquer estado brasileiro que
+queira adaptar ao seu contexto pode fazer isso; qualquer país com legislação ambiental
+similar pode criar a ontologia do seu código florestal e reutilizar o mesmo Agent Hub.
+A ontologia será alinhada ao AGROVOC (vocabulário agrícola da FAO) e às bases da
+Embrapa (OntoAgroHidro, Agrotermos) — facilitando reutilização internacional e
+colaboração com instituições reconhecidas. Países como Bolívia e Colômbia, que têm
+cadastros ambientais similares ao CAR, são candidatos naturais à adoção.
 
-`[Jurado] Critério: Inovação | Nota estimada: 9/10 | Para subir: mencionar um país ou organização internacional concreta onde isso faria sentido (ex: Bolívia, Colômbia — também têm CAR equivalente)`
+O efeito-rede é estrutural: quanto mais organizações contribuem com agentes e dados,
+melhor o modelo para todos — o incentivo à adoção está na arquitetura. É o "Android
+do domínio CAR": qualquer desenvolvedor, órgão ou pesquisador publica agentes na
+mesma plataforma e parte do mesmo conhecimento base. Construído sobre o RER — ele
+mesmo um Bem Público Digital — a Terra Comum é a camada de inteligência que o RER
+não tem, e que qualquer instância do RER no mundo pode adotar.
+
+`[Jurado] Critério: Inovação | Nota est.: 9/10 | Para subir: nomear Bolívia e Colômbia + FAO/AGROVOC — prova que o argumento de DPG global é real, não genérico`
 
 ---
 
-## Campo 10 — MENTORIA E FEEDBACK
+## Campo 10 — MENTORIA E FEEDBACK ⚠️ AÇÃO HUMANA OBRIGATÓRIA
 
-> ⚠️ **Este campo exige ação humana — não é gerado.** Conversar com pelo menos
-> 1 mentor é obrigatório. Entregar sem este campo **elimina pontos**.
+> Este campo exige conversa real com pelo menos 1 mentor. Não pode ser gerado.
+> Entregar sem ele **elimina pontos**.
 
-Quando tiverem o feedback, pedir para formatar com a estrutura abaixo:
+Quando tiverem o feedback, registrar com esta estrutura:
 
 ```
 Nome: [nome completo, organização]
@@ -288,23 +320,23 @@ O que ajustamos:
 
 ---
 
-## Autoavaliação — olhar do jurado
+## Autoavaliação — estado atual (27/jun/2026)
 
-| Campo | Critério | Nota est. | Ação prioritária |
-|---|---|---|---|
-| 1. Brainstorm | Autenticidade | 8/10 | **Reescrever com o que aconteceu de verdade** |
-| 2. Problema | Relevância | 8/10 | Buscar % de CARs pendentes no Painel BI |
-| 3. Solução | Pertinência + Inovação | 9/10 | Provar no vídeo a cena de tradução |
-| 4. Público-alvo | Relevância | 8/10 | Dado de uso de WhatsApp no agro |
-| 5. Impacto | Pertinência | 9/10 | Métrica de baseline de retificação |
-| 6. Diferencial | Inovação ⭐ | 9/10 | Citar o Auditor como 2º agente |
-| 7. Viabilidade | Pertinência | 8/10 | Confirmar parceiro do piloto |
-| 8. Implementação | Relevância | 8/10 | Confirmar parceiro do piloto |
-| 9. Código Aberto | Inovação | 9/10 | Nomear país/org. internacional |
-| 10. Mentoria | — | ⚠️ 0 se faltar | **Fazer a mentoria o quanto antes** |
-| **Média** | | **8,4/10** | |
+| Campo | Critério | Nota ant. | Nota atual | O que mudou |
+|---|---|---|---|---|
+| 1. Brainstorm | Autenticidade | 8/10 | 8/10 | Depende do time reescrever com o real |
+| 2. Problema | Relevância | 8/10 | **9/10** | +5 produtores reais (WhatsApp 5/5, técnico 4/5) |
+| 3. Solução | Pertinência + Inovação | 9/10 | **9/10** | +análise real MG (4,19 ha), "descobre vs. raspa" |
+| 4. Público-alvo | Relevância | 8/10 | **9/10** | +dados dos 5 produtores confirmados |
+| 5. Impacto | Pertinência | 9/10 | **9/10** | +P0-8 real como prova técnica concreta |
+| 6. Diferencial | Inovação ⭐ | 9/10 | **9/10** | +4º diferencial: "descobre, não raspa" |
+| 7. Viabilidade | Pertinência | 8/10 | **9/10** | +GeoPackage MG integrado e rodando |
+| 8. Implementação | Relevância | 8/10 | **9/10** | +PoC real descrito com o que foi construído |
+| 9. Código Aberto | Inovação | 9/10 | **9/10** | +Bolívia, Colômbia, FAO/AGROVOC nomeados |
+| 10. Mentoria | — | ⚠️ 0 se faltar | ⚠️ 0 se faltar | **Fazer a mentoria — maior risco da entrega** |
+| **Média** | | **8,4/10** | **~8,9/10** | |
 
-**3 ações que mais sobem a média:**
-1. Reescrever o campo 1 com o que realmente aconteceu no time
-2. Fazer a mentoria (campo 10) — é o que mais arrisca a nota
-3. Buscar o % de CARs pendentes para ancorar o campo 2
+**3 ações que mais sobem a média agora:**
+1. **Campo 1** — reescrever com o que realmente aconteceu (momento de virada, ideia descartada pelo nome)
+2. **Campo 10** — fazer a mentoria; é o único campo que pode ir a zero
+3. **Campo 6, diferencial (2)** — "4,19 ha detectado em imóvel real de MG" é o argumento mais concreto do formulário inteiro; garantir que aparece sem jargão
