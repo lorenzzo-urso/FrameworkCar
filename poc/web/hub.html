@@ -187,6 +187,7 @@
       protocolo: "Dia da Terra",
       governanca: "Governança",
       ecossistemas: "Ecossistemas",
+      comunidades: "Comunidades",
       documentacao: "Documentação",
       dpg: "Bem Público Digital",
     };
@@ -218,9 +219,10 @@
             <div style={{ font: "var(--fw-semibold) 10px var(--font-sans)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", padding: "0 6px 8px" }}>Plataforma</div>
             <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
               <NavItem icon="layout-grid" label="Agentes" badge={count} active={nav === "agentes"} onClick={() => onNav("agentes")} />
-              <NavItem icon="git-fork" label="Dia da Terra" active={nav === "protocolo"} onClick={() => onNav("protocolo")} />
+              <NavItem icon="git-fork" label="Protocolo" active={nav === "protocolo"} onClick={() => onNav("protocolo")} />
               <NavItem icon="shield-check" label="Governança" active={nav === "governanca"} onClick={() => onNav("governanca")} />
               <NavItem icon="globe-2" label="Ecossistemas" active={nav === "ecossistemas"} onClick={() => onNav("ecossistemas")} />
+              <NavItem icon="users" label="Comunidades" active={nav === "comunidades"} onClick={() => onNav("comunidades")} />
             </nav>
 
             <div style={{ marginTop: 18, font: "var(--fw-semibold) 10px var(--font-sans)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", padding: "0 6px 8px" }}>Aberto</div>
@@ -1103,6 +1105,127 @@
     }
 
     /* =====================================================
+       COMUNIDADES PAGE
+    ===================================================== */
+    function ComunidadesPage() {
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+      const [filtro, setFiltro] = React.useState("todos");
+
+      const comunidades = [
+        { nome: "CSA Raízes do Cerrado",          tipo: "CSA",        regiao: "Goiânia, GO",         familias: 34,  area_ha: 8.2,    car: "GO-5208707-CSA01", status: "regular"  },
+        { nome: "Quilombo Kalunga",                tipo: "Quilombola", regiao: "Alto Paraíso, GO",    familias: 280, area_ha: 253500, car: "GO-5200050-QL01",  status: "pendente" },
+        { nome: "Assentamento Zumbi dos Palmares", tipo: "MST",        regiao: "Ribeirão Preto, SP",  familias: 120, area_ha: 1840,   car: "SP-3543402-MST01", status: "regular"  },
+        { nome: "CSA Mandala Viva",                tipo: "CSA",        regiao: "Belo Horizonte, MG",  familias: 18,  area_ha: 3.5,    car: "MG-3106200-CSA02", status: "pendente" },
+        { nome: "Terra Indígena Xavante",          tipo: "Indígena",   regiao: "Barra do Garças, MT", familias: 430, area_ha: 165000, car: "MT-5101902-TI01",  status: "regular"  },
+        { nome: "Assentamento Nova Conquista",     tipo: "MST",        regiao: "Marabá, PA",          familias: 89,  area_ha: 6200,   car: "PA-1504208-MST02", status: "deficit"  },
+        { nome: "Comunidade Ribeirinha Arapiuns",  tipo: "Ribeirinho", regiao: "Santarém, PA",        familias: 62,  area_ha: 12400,  car: "PA-1506807-RB01",  status: "pendente" },
+      ];
+
+      const tipos = [...new Set(comunidades.map(c => c.tipo))];
+
+      const tipoCor = {
+        CSA:        { bg: "rgba(1,105,57,.10)",   cor: "#016939" },
+        Quilombola: { bg: "rgba(180,130,20,.12)", cor: "#7A5800" },
+        MST:        { bg: "rgba(200,60,20,.10)",  cor: "#A83010" },
+        Indígena:   { bg: "rgba(47,130,211,.10)", cor: "#1557A0" },
+        Ribeirinho: { bg: "rgba(30,110,190,.10)", cor: "#205090" },
+      };
+      const tipoIcon = { CSA: "leaf", Quilombola: "home", MST: "tractor", Indígena: "map", Ribeirinho: "waves" };
+      const tipoTone = { CSA: "leaf", Quilombola: "amber", MST: "pine", Indígena: "emerald", Ribeirinho: "leaf" };
+
+      const filtrados = filtro === "todos" ? comunidades : comunidades.filter(c => c.tipo === filtro);
+
+      const totals = {
+        total:    comunidades.length,
+        familias: comunidades.reduce((s, c) => s + c.familias, 0),
+        area:     comunidades.reduce((s, c) => s + c.area_ha, 0),
+        tipos:    tipos.length,
+      };
+
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+          <div className="hero">
+            <div className="eyebrow">Territórios e grupos sociais</div>
+            <h1>Comunidades <em>do campo</em></h1>
+            <p>CSAs, quilombos, assentamentos, povos indígenas e ribeirinhos — a mesma camada semântica do CAR adaptada para o território coletivo. Cada comunidade é um ator no ecossistema do Código Florestal.</p>
+          </div>
+
+          {/* Stats */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
+            {[
+              { v: totals.total,                                   l: "Comunidades" },
+              { v: totals.tipos,                                   l: "Tipos" },
+              { v: totals.familias.toLocaleString("pt-BR"),        l: "Famílias" },
+              { v: (totals.area / 1000).toFixed(0) + "k",         l: "Hectares" },
+            ].map(s => (
+              <div key={s.l} style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "14px 16px" }}>
+                <div style={{ font: "var(--fw-bold) 10px var(--font-sans)", color: "var(--text-faint)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 4 }}>{s.l}</div>
+                <div style={{ font: "var(--fw-bold) 26px/1 var(--font-mono)", color: "var(--text-strong)" }}>{s.v}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Filtros + CTA */}
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            {["todos", ...tipos].map(t => (
+              <button key={t} onClick={() => setFiltro(t)} style={{
+                border: `1px solid ${filtro === t ? "var(--accent)" : "var(--border-subtle)"}`,
+                background: filtro === t ? "rgba(1,105,57,.08)" : "var(--surface-card)",
+                color: filtro === t ? "var(--accent)" : "var(--text-muted)",
+                font: "var(--fw-semibold) 12px var(--font-sans)",
+                borderRadius: "var(--radius-pill)", padding: "5px 14px", cursor: "pointer",
+              }}>{t === "todos" ? "Todos" : t}</button>
+            ))}
+            <div style={{ marginLeft: "auto" }}>
+              <Button variant="primary" size="sm" icon={<i data-lucide="plus"></i>} style={{ color: "#FFFFFF" }}>Cadastrar comunidade</Button>
+            </div>
+          </div>
+
+          {/* Lista */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {filtrados.map((c, i) => {
+              const tc = tipoCor[c.tipo] || {};
+              return (
+                <Card key={i} interactive>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                    <Avatar tone={tipoTone[c.tipo] || "leaf"} size={44} icon={<i data-lucide={tipoIcon[c.tipo] || "users"}></i>} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 5 }}>
+                        <span style={{ font: "var(--fw-bold) 15px var(--font-display)", color: "var(--text-strong)" }}>{c.nome}</span>
+                        <span style={{ background: tc.bg, color: tc.cor, font: "var(--fw-semibold) 10px var(--font-sans)", letterSpacing: ".06em", padding: "2px 9px", borderRadius: "var(--radius-pill)", whiteSpace: "nowrap" }}>{c.tipo}</span>
+                        {c.status === "regular"  && <Badge tone="active">regular</Badge>}
+                        {c.status === "pendente" && <Badge tone="muted">pendente</Badge>}
+                        {c.status === "deficit"  && <Badge tone="alert">déficit</Badge>}
+                      </div>
+                      <div style={{ display: "flex", gap: 16, font: "13px var(--font-sans)", color: "var(--text-muted)", flexWrap: "wrap", alignItems: "center" }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                          <i data-lucide="map-pin" style={{ width: 12, height: 12 }}></i>{c.regiao}
+                        </span>
+                        <span><strong style={{ color: "var(--text-body)" }}>{c.familias}</strong> famílias</span>
+                        <span><strong style={{ color: "var(--text-body)" }}>{c.area_ha.toLocaleString("pt-BR")}</strong> ha</span>
+                        <code style={{ font: "11px var(--font-mono)", color: "var(--text-faint)" }}>{c.car}</code>
+                      </div>
+                    </div>
+                    <Button variant="secondary" size="sm" icon={<i data-lucide="external-link"></i>}>Ver CAR</Button>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Nota ontológica */}
+          <div style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "16px 20px", display: "flex", gap: 12, alignItems: "flex-start" }}>
+            <i data-lucide="info" style={{ width: 16, height: 16, color: "var(--accent)", marginTop: 1, flex: "none" }}></i>
+            <p style={{ font: "13px/1.6 var(--font-sans)", color: "var(--text-muted)", margin: 0 }}>
+              Comunidades quilombolas, indígenas e ribeirinhas têm regimes jurídicos diferenciados no Código Florestal (Art. 3º, § 1º e Lei nº 9.985/2000). A ontologia CAR modela essas especificidades como subclasses de{" "}
+              <code style={{ font: "11.5px var(--font-mono)", color: "var(--accent)" }}>car:Imovel</code>, permitindo que os agentes apliquem as regras corretas para cada contexto sem reconfiguração.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    /* =====================================================
        DOCUMENTAÇÃO PAGE
     ===================================================== */
     function CodeBlock({ title, lang, children, badge }) {
@@ -1500,6 +1623,9 @@ llm:
 
           {/* ECOSSISTEMAS */}
           {nav === "ecossistemas" && <EcossistemasPage />}
+
+          {/* COMUNIDADES */}
+          {nav === "comunidades" && <ComunidadesPage />}
 
           {/* DOCUMENTAÇÃO */}
           {nav === "documentacao" && <DocumentacaoPage />}
