@@ -15,7 +15,7 @@ from pydantic import BaseModel
 
 from agent_hub import AgentHub
 from traduzir_llm import escolher_provedor
-from analise_app import analisar_amostra
+from analise_app import analisar_geometria_fixture
 
 app = FastAPI(
     title="Compadre / Terra Comum — PoC",
@@ -61,6 +61,7 @@ def conversa(inp: ConversaIn):
 
 @app.get("/analise/demo")
 def analise_demo():
-    """Análise própria de déficit de APP (P0-8) sobre a geometria de amostra.
-    Em produção, a geometria vem da consulta pública + recorte do GeoPackage SFB."""
-    return analisar_amostra()
+    """Análise própria de déficit de APP (P0-8). Lê a geometria do contrato
+    `geometria.fixture.json` — produzido pelo B2 a partir do recorte do GeoPackage
+    SFB (hoje seed sintético; vira real quando o gpkg de MG estiver pronto)."""
+    return analisar_geometria_fixture()

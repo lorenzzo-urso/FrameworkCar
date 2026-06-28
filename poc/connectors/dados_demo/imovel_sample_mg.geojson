@@ -1,0 +1,11 @@
+{
+  "_comment": "PLACEHOLDER — poligono aproximado de um imovel em Alvinopolis/MG (EPSG:4674, lat/lon), so para o pipeline ter geometria enquanto o B1-real (consulta publica / shapefile do municipio) nao traz o poligono verdadeiro do CAR MG-3102308-... Substituir pelo poligono real quando disponivel.",
+  "type": "Polygon",
+  "coordinates": [[
+    [-43.055, -20.110],
+    [-43.049, -20.110],
+    [-43.049, -20.104],
+    [-43.055, -20.104],
+    [-43.055, -20.110]
+  ]]
+}

@@ -43,6 +43,18 @@
     .abrir { display: inline-block; margin-top: 12px; background: #2fd39a; color: #08231b;
       text-decoration: none; padding: 7px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; }
     .nota { text-align: center; color: #6f9488; font-size: 12px; margin-top: 28px; }
+
+    .analise { margin-top: 22px; background: #16302a; border: 1px solid #245046; border-radius: 12px; padding: 18px; }
+    .analise h2 { font-size: 17px; color: #2fd39a; }
+    .analise .sub { color: #93b3a8; font-size: 12px; margin: 4px 0 14px; }
+    .metric-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .metric { background: #0f241f; border: 1px solid #245046; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 130px; }
+    .metric .v { font-size: 24px; font-weight: 800; color: #e8f3ee; }
+    .metric .v.alerta { color: #ff8a5b; }
+    .metric .v.ok { color: #2fd39a; }
+    .metric .l { font-size: 11px; color: #93b3a8; margin-top: 2px; }
+    .analise .fonte { margin-top: 12px; font-size: 11.5px; color: #79c9ad; }
+    .analise .fonte code { font-family: ui-monospace, monospace; color: #6b8f84; }
   </style>
 </head>
 <body>
@@ -55,6 +67,12 @@
     <div class="base">
       Todos os agentes raciocinam sobre a <b>mesma ontologia do CAR</b>
       <small>backend/ontologia/car.ttl — regras do Código Florestal, rastreáveis</small>
+    </div>
+
+    <div class="analise" id="analise">
+      <h2>🛰️ Validação antecipada — déficit de APP</h2>
+      <p class="sub">A plataforma <b>descobre</b> o problema (geometria × ontologia), antes do produtor enviar — não depende do SICAR.</p>
+      <div id="analise-corpo">carregando…</div>
     </div>
 
     <div class="grade" id="grade"></div>
@@ -106,6 +124,25 @@
     }
 
     fetch(API).then(r => r.json()).then(render).catch(() => render(FALLBACK));
+
+    // --- painel de análise de APP (GET /analise/demo) ---
+    const API_ANALISE = "http://127.0.0.1:8000/analise/demo";
+    const ANALISE_FALLBACK = {
+      faixa_exigida_m: 30, deficit_m2: 1800, deficit_ha: 0.18, conforme: false,
+      fonte: "Lei 12.651/2012, Art. 4º, I, alínea a", rastro_ontologia: "car:FaixaAPP_ate10"
+    };
+    function renderAnalise(a) {
+      const cls = a.conforme ? "ok" : "alerta";
+      const status = a.conforme ? "conforme" : "déficit";
+      document.getElementById("analise-corpo").innerHTML = `
+        <div class="metric-row">
+          <div class="metric"><div class="v">${a.faixa_exigida_m} m</div><div class="l">faixa de APP exigida (da ontologia)</div></div>
+          <div class="metric"><div class="v ${cls}">${a.deficit_m2} m²</div><div class="l">déficit de mata ciliar (${status})</div></div>
+          <div class="metric"><div class="v ${cls}">${a.deficit_ha} ha</div><div class="l">em hectares</div></div>
+        </div>
+        <div class="fonte">📖 ${a.fonte} &nbsp; <code>${a.rastro_ontologia}</code></div>`;
+    }
+    fetch(API_ANALISE).then(r => r.json()).then(renderAnalise).catch(() => renderAnalise(ANALISE_FALLBACK));
   </script>
 </body>
 </html>

@@ -95,7 +95,7 @@ Exemplo de chamada:
 ```bash
 curl -X POST http://127.0.0.1:8000/conversa \
   -H "Content-Type: application/json" \
-  -d '{"numero_car":"RJ-3304300-XXX","mensagem":"oi, tenho uma pendencia"}'
+  -d '{"numero_car":"MG-3102308-1F30612FD2F845A7B8852A7B0BF07455","mensagem":"oi, tenho uma pendencia"}'
 ```
 
 ---

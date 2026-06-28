@@ -21,14 +21,22 @@ def test_compadre_operacional_auditor_nao():
 
 
 def test_conversa_retorna_contrato():
-    r = hub.run_agent("compadre", "RJ-3304300-XXX", "oi, tenho pendência")
+    r = hub.run_agent("compadre", "MG-3102308-XXX", "oi, tenho pendência")
     # campos do contrato conversa.example.json
-    for campo in ["traducao", "pendencias", "regra_aplicada", "proximo_passo", "link_sicar", "beneficios"]:
+    for campo in ["traducao", "pendencias", "regra_aplicada", "analise_app", "proximo_passo", "link_sicar", "beneficios"]:
         assert campo in r, f"falta o campo {campo}"
 
 
+def test_a3_analise_app_no_fluxo():
+    r = hub.run_agent("compadre", "MG-3102308-XXX", "oi")
+    a = r["analise_app"]
+    assert a is not None
+    assert a["faixa_exigida_m"] == 30
+    assert a["rastro_ontologia"].startswith("car:")
+
+
 def test_p07_regra_rastreavel():
-    r = hub.run_agent("compadre", "RJ-3304300-XXX", "oi")
+    r = hub.run_agent("compadre", "MG-3102308-XXX", "oi")
     ra = r["regra_aplicada"]
     assert ra is not None
     assert ra["fonte"]                                  # tem fonte legal
@@ -36,13 +44,13 @@ def test_p07_regra_rastreavel():
 
 
 def test_conversa_traz_pendencias_e_beneficios():
-    r = hub.run_agent("compadre", "RJ-3304300-XXX", "oi")
+    r = hub.run_agent("compadre", "MG-3102308-XXX", "oi")
     assert len(r["pendencias"]) == 2                    # CIB + representante
     assert len(r["beneficios"]) >= 2
 
 
 def test_auditor_nao_executa_no_poc():
-    r = hub.run_agent("auditor", "RJ-3304300-XXX", "oi")
+    r = hub.run_agent("auditor", "MG-3102308-XXX", "oi")
     assert "erro" in r
 
 

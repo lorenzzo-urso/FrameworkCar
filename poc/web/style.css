@@ -15,22 +15,79 @@
 body {
   font-family: system-ui, "Segoe UI", sans-serif;
   background: #d2dbe0;
-  display: flex;
-  justify-content: center;
   min-height: 100vh;
 }
+
+/* palco: bastidores | chat | mini-cola */
+.palco {
+  display: grid;
+  grid-template-columns: 1fr minmax(330px, 410px) 1fr;
+  gap: 20px;
+  align-items: center;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 22px;
+}
+.lateral { align-self: center; max-height: 86vh; overflow-y: auto; }
 
 /* moldura do celular */
 .fone {
   width: 100%;
-  max-width: 420px;
-  height: 100vh;
-  max-height: 860px;
+  max-width: 410px;
+  height: 86vh;
+  max-height: 820px;
   background: var(--wa-bg);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 40px rgba(0,0,0,.25);
+  box-shadow: 0 10px 44px rgba(0,0,0,.28);
   position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* ---------- BASTIDORES (console) ---------- */
+.console {
+  background: #0d1117;
+  border: 1px solid #1f2630;
+  border-radius: 12px;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+}
+.console-topo {
+  display: flex; align-items: center; gap: 7px;
+  padding: 10px 14px; border-bottom: 1px solid #1f2630;
+}
+.console-topo .dot { width: 11px; height: 11px; border-radius: 50%; }
+.dot.r { background: #ff5f56; } .dot.y { background: #ffbd2e; } .dot.g { background: #27c93f; }
+.console-titulo { margin-left: 8px; color: #6e7681; font-size: 11.5px; }
+.console-log { padding: 14px; font-size: 12px; line-height: 1.7; color: #c9d1d9; }
+.console-log .cmd { color: #58a6ff; }
+.console-log .cmd b { color: #79c0ff; font-weight: 600; }
+.console-log .out { color: #8b949e; padding-left: 14px; }
+.console-log .out .val { color: #7ee787; }
+.console-log .out .lei { color: #ffa657; }
+.console-log .out .rastro { color: #d2a8ff; }
+.console-log .linha { animation: surge .2s ease-out; }
+.console-log .pisca::after { content: "▋"; color: #58a6ff; animation: blink 1s steps(2) infinite; }
+@keyframes blink { 0%,50%{opacity:1} 50.1%,100%{opacity:0} }
+
+/* ---------- MINI-COLA ---------- */
+.colas h2 { font-size: 16px; color: #1f3a32; margin-bottom: 4px; }
+.colas-sub { font-size: 12px; color: #5b6b66; margin-bottom: 14px; }
+.cola {
+  background: #fff; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px;
+  border-left: 3px solid #2e9e6b; box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.cola h3 { font-size: 13.5px; color: #1f3a32; margin-bottom: 3px; }
+.cola p { font-size: 12px; color: #51605b; line-height: 1.5; }
+.cola.fonte-aberta { border-left-color: #3b7dd8; }
+
+/* ---------- responsivo: empilha em telas estreitas ---------- */
+@media (max-width: 1040px) {
+  .palco { grid-template-columns: 1fr; gap: 16px; }
+  .lateral { max-height: none; max-width: 410px; margin: 0 auto; width: 100%; }
+  .fone { height: 80vh; }
 }
 
 /* cabeçalho */

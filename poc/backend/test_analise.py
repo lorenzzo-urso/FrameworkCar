@@ -6,7 +6,7 @@ Testes da análise de déficit de APP (P0-8). Roda sem pytest:
 import copy
 import json
 from pathlib import Path
-from analise_app import analisar_app, analisar_amostra
+from analise_app import analisar_app, analisar_amostra, analisar_recorte, analisar_geometria_fixture
 
 AMOSTRA = json.loads((Path(__file__).parent / "dados_demo" / "imovel_demo.geojson").read_text(encoding="utf-8"))
 
@@ -46,6 +46,27 @@ def test_p07_tem_fonte_e_rastro():
     r = analisar_amostra()
     assert r["fonte"]
     assert r["rastro_ontologia"].startswith("car:")
+
+
+def test_recorte_agua_poligono():
+    # caminho do B2: água vem como POLÍGONO (não linha). Rio de 6 m, sem mata.
+    recorte = {
+        "crs_metrico": "EPSG:31983",
+        "imovel": {"type": "Polygon", "coordinates": [[[0, 0], [80, 0], [80, 100], [0, 100], [0, 0]]]},
+        "corpos_dagua": {"type": "Polygon", "coordinates": [[[-3, -10], [3, -10], [3, 110], [-3, 110], [-3, -10]]]},
+        "vegetacao_nativa": None,
+    }
+    r = analisar_recorte(recorte, largura_rio_m=8)
+    assert r["faixa_exigida_m"] == 30                 # da ontologia
+    assert 2800 < r["deficit_m2"] < 3200              # faixa de 30 m x 100 m, sem mata
+    assert r["fonte"] and r["rastro_ontologia"].startswith("car:")
+
+
+def test_geometria_fixture_le_contrato():
+    r = analisar_geometria_fixture()
+    assert r["faixa_exigida_m"] == 30
+    assert r["deficit_m2"] > 0
+    assert r["fonte"]
 
 
 if __name__ == "__main__":

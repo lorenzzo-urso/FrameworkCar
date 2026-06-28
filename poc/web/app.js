@@ -6,16 +6,61 @@
  */
 
 const API = "http://127.0.0.1:8000/conversa";
-const CAR_DEMO = "RJ-3304300-C34F7184E63C4CCBBBF04FF840098E53";
+const CAR_DEMO = "MG-3102308-1F30612FD2F845A7B8852A7B0BF07455";
+
+const BASE = API.replace("/conversa", "");
 
 const chat = document.getElementById("chat");
 const entrada = document.getElementById("entrada");
 const enviar = document.getElementById("enviar");
 const modoTag = document.getElementById("modo");
+const consoleLog = document.getElementById("console-log");
+
+let provedorLLM = "llm";
+fetch(BASE + "/").then(r => r.json()).then(d => { provedorLLM = d.provedor_llm || "llm"; }).catch(() => {});
+
+// ---- bastidores: mostra o pipeline real que produziu a resposta ----
+function logLinha(html, classe) {
+  const div = document.createElement("div");
+  div.className = "linha " + (classe || "");
+  div.innerHTML = html;
+  consoleLog.appendChild(div);
+  consoleLog.scrollTop = consoleLog.scrollHeight;
+  return div;
+}
+const espera = ms => new Promise(r => setTimeout(r, ms));
+
+async function bastidores(numero, r) {
+  consoleLog.innerHTML = "";
+  const passos = [
+    () => logLinha(`<span class="cmd">$ hub.load(<b>"compadre.yaml"</b>)</span>`),
+    () => logLinha(`<span class="out">↳ tools: consultar_sicar · consultar_ontologia · traduzir_llm</span>`),
+    () => logLinha(`<span class="cmd">$ consultar_sicar(<b>"${escape(numero).slice(0, 18)}…"</b>)</span>`),
+    () => logLinha(`<span class="out">↳ situação: <span class="val">${r.pendencias ? r.pendencias.length : 0} alerta(s)</span></span>`),
+  ];
+  if (r.regra_aplicada) {
+    passos.push(() => logLinha(`<span class="cmd">$ consultar_ontologia(<b>pendência</b>)</span>`));
+    passos.push(() => logLinha(`<span class="out">↳ regra: <span class="lei">${escape(r.regra_aplicada.fonte)}</span><br>&nbsp;&nbsp;<span class="rastro">${escape(r.regra_aplicada.rastro_ontologia)}</span></span>`));
+  }
+  if (r.analise_app) {
+    passos.push(() => logLinha(`<span class="cmd">$ analise_app.<b>deficit_app()</b></span>`));
+    const a = r.analise_app;
+    const v = a.conforme ? `<span class="val">conforme</span>` : `<span class="lei">déficit ${escape(a.deficit_m2)} m²</span>`;
+    passos.push(() => logLinha(`<span class="out">↳ ${v} · faixa ${escape(a.faixa_exigida_m)} m <span class="rastro">${escape(a.rastro_ontologia)}</span></span>`));
+  }
+  if (r.beneficios && r.beneficios.length) {
+    passos.push(() => logLinha(`<span class="cmd">$ consultar_ontologia.<b>beneficios("Ativo")</b></span>`));
+    passos.push(() => logLinha(`<span class="out">↳ <span class="val">${r.beneficios.length} benefícios</span> desbloqueados</span>`));
+  }
+  passos.push(() => logLinha(`<span class="cmd">$ traduzir_llm(<b>${escape(provedorLLM)}</b>) → resposta</span>`));
+
+  for (const p of passos) { p(); await espera(260); }
+  logLinha(`<span class="cmd pisca"></span>`);
+}
 
 // resposta de reserva (mesmo shape de contracts/conversa.example.json)
 const FALLBACK = {
-  traducao: "Olá! Dei uma olhada no Sítio Três Rios e ele está com 2 avisos. O mais simples de resolver: falta o código CIB — o número que identifica o imóvel na Receita Federal e liga o CAR ao registro. Você tem o comprovante do imóvel em mãos?",
+  traducao: "Olá! Dei uma olhada no Lote 56 e 57 da Quadra nº 13 (Alvinópolis/MG) e ele está com 2 avisos. O mais simples de resolver: falta o código CIB — o número que identifica o imóvel na Receita Federal e liga o CAR ao registro. Você tem o comprovante do imóvel em mãos?",
   pendencias: [
     { tipo: "CIB_ausente", gravidade: "alerta", explicacao: "Falta o código CIB do imóvel.", o_que_fazer: "Pegue o comprovante (CAFIR/ITR) e informe o número do CIB." },
     { tipo: "representante_ausente", gravidade: "alerta", explicacao: "Nenhum representante foi adicionado.", o_que_fazer: "Você pode se adicionar como representante." }
@@ -25,6 +70,10 @@ const FALLBACK = {
     parametro_legal: "Cadastro exige identificação e comprovação do imóvel (Art. 29).",
     fonte: "Lei 12.651/2012, Art. 29, §1º, II e III",
     rastro_ontologia: "car:Pendencia_CIB"
+  },
+  analise_app: {
+    faixa_exigida_m: 30, deficit_m2: 1800, deficit_ha: 0.18, conforme: false,
+    fonte: "Lei 12.651/2012, Art. 4º, I, alínea a", rastro_ontologia: "car:FaixaAPP_ate10"
   },
   proximo_passo: "Vamos resolver primeiro o CIB. Depois cuidamos do representante.",
   link_sicar: "https://car-sus.dataprev.gov.br/#/",
@@ -79,6 +128,17 @@ function renderResposta(r) {
     </div>`;
   }
 
+  // ANÁLISE DE APP — validação antecipada (A3): descobre o déficit antes do envio
+  if (r.analise_app && !r.analise_app.conforme) {
+    const a = r.analise_app;
+    html += `<div class="selo" style="border-left-color:#c0561f;background:#fff3ec;color:#b2491a">
+      <b>🛰️ Encontrei um ponto de atenção:</b>
+      sua mata perto d'água está com déficit de <b>${escape(a.deficit_m2)} m²</b>
+      (a lei pede ${escape(a.faixa_exigida_m)} m de faixa).<br>
+      <span class="rastro" style="color:#9c6b4f">${escape(a.fonte)} · ${escape(a.rastro_ontologia)}</span>
+    </div>`;
+  }
+
   if (r.beneficios && r.beneficios.length) {
     html += `<div class="lista">Com o CAR em dia, você desbloqueia:<br>`;
     for (const b of r.beneficios) html += `<span class="benef">${escape(b)}</span>`;
@@ -93,11 +153,16 @@ function renderResposta(r) {
 
 async function consultar(numeroCar, mensagem) {
   try {
+    // timeout: se o backend não responder em 2,5s, cai no fallback (não trava a UI)
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 2500);
     const resp = await fetch(API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ numero_car: numeroCar, mensagem }),
+      signal: ctrl.signal,
     });
+    clearTimeout(t);
     if (!resp.ok) throw new Error("api");
     modoTag.textContent = "ao vivo";
     return await resp.json();
@@ -124,6 +189,7 @@ async function responder(texto) {
     await new Promise((r) => setTimeout(r, 900));
     t2.remove();
     const r = await consultar(numero, "consulta inicial");
+    bastidores(numero, r);                 // mostra o pipeline real nos bastidores
     bolha("in", renderResposta(r));
     etapa = 2;
   } else {
@@ -145,4 +211,5 @@ entrada.addEventListener("keydown", (e) => { if (e.key === "Enter") mandar(); })
 // abertura
 window.addEventListener("load", () => {
   bolha("in", "👋 Oi! Sou o <b>Compadre</b>, te ajudo a resolver o CAR sem complicação. Manda um “oi” pra começar.");
+  if (consoleLog) logLinha(`<span class="out">aguardando o produtor… <span class="pisca"></span></span>`);
 });

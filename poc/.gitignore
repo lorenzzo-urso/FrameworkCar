@@ -20,7 +20,8 @@ dist/
 # Dados geoespaciais grandes (tambem ignorados na raiz Dados/)
 *.gpkg
 *.tif
-*.geojson
+# OBS: .geojson NAO e ignorado — os samples pequenos (dados_demo/) sao
+# necessarios para o codigo rodar. Arquivos grandes ficam em Dados/ (ja ignorado).
 
 # OS / editor
 .DS_Store

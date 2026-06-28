@@ -1,13 +1,12 @@
 # connectors/ — Dev B (bordas: dados externos). Python 3.11+
 # Instalar num venv proprio:  python -m venv .venv && .venv\Scripts\activate && pip install -r requirements.txt
 
-# --- Conector SICAR (P0-3) ---
-requests>=2.31          # consulta HTTP ao consulta.car.gov.br
-beautifulsoup4>=4.12    # parsing do HTML dos alertas
-lxml>=5.0               # parser rapido para o BeautifulSoup
-# playwright>=1.42       # DESCOMENTAR so se o SICAR exigir render de JS / for anti-bot
+# --- B1: conector da consulta publica (situacao + geometria) ---
+requests>=2.31          # chamada HTTP a consulta publica (quando o endpoint for confirmado)
+# playwright>=1.42       # DESCOMENTAR so se a SPA exigir render de JS / for anti-bot
                         # (depois: python -m playwright install chromium)
 
-# --- Conector SFB (P1-2) — so se houver tempo ---
-# geopandas>=0.14        # ler o GeoPackage AL (1,84 GB). Pesado (puxa GDAL).
-                        # Deixar comentado ate o P1 entrar de fato.
+# --- B2: recorte do GeoPackage SFB (geometria + cobertura) ---
+geopandas>=1.0          # ler/recortar/reprojetar o GeoPackage SFB
+pyogrio>=0.8            # leitura rapida do .gpkg por bbox (vem com o geopandas)
+shapely>=2.0            # operacoes geometricas

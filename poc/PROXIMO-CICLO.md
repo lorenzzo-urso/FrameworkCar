@@ -23,15 +23,15 @@ análise roda sobre **geometria de amostra**, não sobre o imóvel real.
 
 ---
 
-## Decisão que destrava tudo (tomar primeiro)
+## Decisão que destrava tudo (RESOLVIDA)
 
-⚠️ **Definir o estado do imóvel de demo e ter o GeoPackage SFB desse estado.**
-Hoje o imóvel de demo é **RJ** (Sítio Três Rios), mas só baixamos o SFB de **AL**.
-Para a análise rodar sobre dado real, escolher uma das opções:
-- (a) trocar o imóvel de demo para um de **AL** (já temos o `.gpkg`), ou
-- (b) baixar o GeoPackage SFB de **RJ** (mesmo padrão, ~1-2 GB).
+✅ **Imóvel de demo definido:** Lote 56 e 57 da Quadra nº 13 — Alvinópolis/**MG**
+(`MG-3102308-1F30612FD2F845A7B8852A7B0BF07455`).
+🔄 **GeoPackage SFB de MG em download** (lento). Quando terminar, salvar em
+`Dados/Regularização Ambiental - Uso do Solo/MG_CAR_Uso_Cobertura_Solo.gpkg` e
+rodar o B2 sobre o polígono real → a análise de déficit deixa de ser sintética.
 
-Sem isso, a análise de déficit continua na amostra sintética.
+Até lá, a análise roda sobre a amostra sintética no contrato `geometria.fixture.json`.
 
 ---
 

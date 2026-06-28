@@ -15,6 +15,7 @@ import yaml
 from consultar_sicar import consultar_sicar
 from consultar_ontologia import Ontologia
 from traduzir_llm import traduzir
+from analise_app import analisar_geometria_fixture
 
 AGENTS_DIR = Path(__file__).parent / "agents"
 
@@ -98,6 +99,20 @@ class AgentHub:
         beneficios_full = onto.beneficios(situacao_car="Ativo")
         beneficios = [b["beneficio"] for b in beneficios_full]
 
+        # A3: validação antecipada — déficit de APP descoberto pela plataforma
+        try:
+            a = analisar_geometria_fixture()
+            analise_app = {
+                "faixa_exigida_m": a["faixa_exigida_m"],
+                "deficit_m2": a["deficit_m2"],
+                "deficit_ha": a["deficit_ha"],
+                "conforme": a["conforme"],
+                "fonte": a["fonte"],
+                "rastro_ontologia": a["rastro_ontologia"],
+            }
+        except Exception:
+            analise_app = None
+
         traducao, proximo_passo = traduzir(dados, pendencias_out, beneficios)
 
         # P0-7: a regra aplicada, rastreável, sempre presente
@@ -115,6 +130,7 @@ class AgentHub:
             "traducao": traducao,
             "pendencias": pendencias_out,
             "regra_aplicada": regra_aplicada,
+            "analise_app": analise_app,
             "proximo_passo": proximo_passo,
             "link_sicar": "https://car-sus.dataprev.gov.br/#/",
             "beneficios": beneficios,

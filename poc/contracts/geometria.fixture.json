@@ -1,0 +1,17 @@
+{
+  "_comment": "Contrato: a geometria METRICA que o B2 (connectors/sfb_recorte) ENTREGA e o analise_app (A2) CONSOME. SEED sintetico (coordenadas em metros) so para o A2 rodar enquanto o GeoPackage SFB de MG nao termina de baixar. Quando B2 rodar sobre o imovel real, sobrescreve este arquivo com imovel/corpos_dagua/vegetacao_nativa reais (reprojetados p/ UTM). Cenario seed: rio na borda oeste; mata nativa de 12 m; lei exige 30 m -> deficit de 1800 m2.",
+  "crs_metrico": "seed-local-metric",
+  "largura_rio_m_assumida": 8,
+  "imovel": {
+    "type": "Polygon",
+    "coordinates": [[[0, 0], [80, 0], [80, 100], [0, 100], [0, 0]]]
+  },
+  "corpos_dagua": {
+    "type": "LineString",
+    "coordinates": [[0, -10], [0, 110]]
+  },
+  "vegetacao_nativa": {
+    "type": "Polygon",
+    "coordinates": [[[0, 0], [12, 0], [12, 100], [0, 100], [0, 0]]]
+  }
+}

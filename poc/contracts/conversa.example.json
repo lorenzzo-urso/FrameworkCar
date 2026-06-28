@@ -1,11 +1,11 @@
 {
   "_comment": "Contrato: o que a API /conversa (backend/, Dev A) ENTREGA para a interface (web/, Dev B). A web deve renderizar contra este exemplo enquanto a API real nao existir. Campo 'regra_aplicada' e obrigatorio (P0-7): prova que a resposta vem da ontologia, nao de adivinhacao do LLM.",
   "request": {
-    "numero_car": "RJ-3304300-C34F7184E63C4CCBBBF04FF840098E53",
+    "numero_car": "MG-3102308-1F30612FD2F845A7B8852A7B0BF07455",
     "mensagem": "oi, tenho uma pendencia no meu CAR"
   },
   "response": {
-    "traducao": "Seu Sitio Tres Rios esta com dois avisos pequenos. O mais facil de resolver: falta o codigo CIB, que e o numero da escritura registrada do seu imovel. Voce tem a escritura em maos?",
+    "traducao": "Seu Lote 56 e 57 da Quadra n 13 (Alvinopolis/MG) esta com dois avisos pequenos. O mais facil de resolver: falta o codigo CIB, que e o numero que identifica o imovel na Receita Federal. Voce tem o comprovante do imovel em maos?",
     "pendencias": [
       {
         "tipo": "CIB_ausente",
@@ -25,6 +25,14 @@
       "parametro_legal": "Cadastro exige associacao ao registro do imovel (CIB/SNCR)",
       "fonte": "Manual do CAR / regras do SICAR",
       "rastro_ontologia": "car:Pendencia -> car:exigeDocumento -> car:CIB"
+    },
+    "analise_app": {
+      "faixa_exigida_m": 30,
+      "deficit_m2": 1800.0,
+      "deficit_ha": 0.18,
+      "conforme": false,
+      "fonte": "Lei 12.651/2012, Art. 4o, I, alinea a",
+      "rastro_ontologia": "car:FaixaAPP_ate10"
     },
     "proximo_passo": "Resolver o CIB primeiro (mais simples). Depois adicionar o representante.",
     "link_sicar": "https://car-sus.dataprev.gov.br/#/",
