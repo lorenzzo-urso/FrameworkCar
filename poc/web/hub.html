@@ -1,148 +1,457 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terra Comum — Agent Hub</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, "Segoe UI", sans-serif;
-      background: #0f1c18; color: #e8f3ee; min-height: 100vh; padding: 32px 20px;
-    }
-    .wrap { max-width: 920px; margin: 0 auto; }
-    .cab { text-align: center; margin-bottom: 8px; }
-    .cab h1 { font-size: 26px; font-weight: 800; }
-    .cab h1 span { color: #2fd39a; }
-    .cab p { color: #93b3a8; font-size: 14px; margin-top: 6px; }
-
-    .base {
-      margin: 24px auto; max-width: 560px; text-align: center;
-      background: #16302a; border: 1px solid #245046; border-radius: 12px; padding: 14px;
-    }
-    .base b { color: #2fd39a; }
-    .base small { color: #84a89c; display: block; margin-top: 4px; }
-
-    .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 16px; margin-top: 20px; }
-    .card {
-      background: #16302a; border: 1px solid #245046; border-radius: 12px; padding: 16px;
-      transition: transform .15s, border-color .15s;
-    }
-    .card.ativo { border-color: #2fd39a; }
-    .card:hover { transform: translateY(-3px); }
-    .card h3 { font-size: 17px; display: flex; align-items: center; gap: 8px; }
-    .card .persona { color: #93b3a8; font-size: 12px; margin: 4px 0 10px; }
-    .pill {
-      font-size: 10px; padding: 2px 9px; border-radius: 10px; font-weight: 700;
-    }
-    .on  { background: #1f6f5c; color: #d8f0e4; }
-    .off { background: #3a3a3a; color: #bbb; }
-    .tools { margin-top: 10px; }
-    .tool { display: inline-block; background: #0f241f; color: #79c9ad; border: 1px solid #245046;
-      border-radius: 6px; padding: 2px 8px; font-size: 11px; margin: 3px 3px 0 0; font-family: ui-monospace, monospace; }
-    .abrir { display: inline-block; margin-top: 12px; background: #2fd39a; color: #08231b;
-      text-decoration: none; padding: 7px 14px; border-radius: 8px; font-weight: 700; font-size: 13px; }
-    .nota { text-align: center; color: #6f9488; font-size: 12px; margin-top: 28px; }
-
-    .analise { margin-top: 22px; background: #16302a; border: 1px solid #245046; border-radius: 12px; padding: 18px; }
-    .analise h2 { font-size: 17px; color: #2fd39a; }
-    .analise .sub { color: #93b3a8; font-size: 12px; margin: 4px 0 14px; }
-    .metric-row { display: flex; gap: 14px; flex-wrap: wrap; }
-    .metric { background: #0f241f; border: 1px solid #245046; border-radius: 10px; padding: 12px 16px; flex: 1; min-width: 130px; }
-    .metric .v { font-size: 24px; font-weight: 800; color: #e8f3ee; }
-    .metric .v.alerta { color: #ff8a5b; }
-    .metric .v.ok { color: #2fd39a; }
-    .metric .l { font-size: 11px; color: #93b3a8; margin-top: 2px; }
-    .analise .fonte { margin-top: 12px; font-size: 11.5px; color: #79c9ad; }
-    .analise .fonte code { font-family: ui-monospace, monospace; color: #6b8f84; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terra Comum — Agent Hub</title>
+<!-- Design system: Terra Comum (tokens + bundle de componentes) -->
+<link rel="stylesheet" href="ds/styles.css" />
+<style>
+  html, body { background: var(--bg-base); }
+  .hero {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+    background:
+      radial-gradient(120% 140% at 88% -20%, rgba(47,211,154,.10), transparent 55%),
+      linear-gradient(180deg, var(--forest-800), var(--surface-card));
+    padding: 30px 32px;
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -40px; top: -40px; width: 280px; height: 280px;
+    background: url("ds/assets/leaf-mark-cut.png") no-repeat center/contain;
+    opacity: .06; pointer-events: none;
+  }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: var(--tracking-eyebrow);
+    font: var(--fw-semibold) var(--text-xs) var(--font-sans); color: var(--leaf-500);
+  }
+  .hero h1 { font: var(--fw-bold) 40px/1.05 var(--font-display); color: var(--text-strong); letter-spacing: -.03em; margin: 10px 0 0; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font: 16px/1.5 var(--font-sans); color: var(--text-muted); margin: 12px 0 0; max-width: 560px; }
+  .sec-head { display: flex; align-items: center; gap: 10px; margin: 32px 0 16px; }
+  .sec-head h2 { font: var(--fw-bold) 15px var(--font-display); color: var(--text-strong); letter-spacing: .01em; }
+  .sec-head .count { font: var(--fw-bold) 11px var(--font-mono); color: var(--text-faint); }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--border-hairline); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .foot { text-align: center; color: var(--text-faint); font: 12.5px/1.6 var(--font-sans); margin: 36px auto 8px; max-width: 640px; }
+  .toast {
+    position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--surface-raised); border: 1px solid var(--accent); color: var(--text-strong);
+    border-radius: var(--radius-pill); padding: 11px 20px; display: flex; align-items: center; gap: 9px;
+    font: var(--fw-semibold) 13px var(--font-sans); box-shadow: var(--glow-accent);
+    opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 60;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  [data-lucide] { width: 16px; height: 16px; }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="cab">
-      <h1>Terra <span>Comum</span> — Agent Hub</h1>
-      <p>Uma camada semântica aberta. Múltiplos agentes. O mesmo conhecimento do território.</p>
-    </div>
+  <div id="root"></div>
 
-    <div class="base">
-      Todos os agentes raciocinam sobre a <b>mesma ontologia do CAR</b>
-      <small>backend/ontologia/car.ttl — regras do Código Florestal, rastreáveis</small>
-    </div>
-
-    <div class="analise" id="analise">
-      <h2>🛰️ Validação antecipada — déficit de APP</h2>
-      <p class="sub">A plataforma <b>descobre</b> o problema (geometria × ontologia), antes do produtor enviar — não depende do SICAR.</p>
-      <div id="analise-corpo">carregando…</div>
-    </div>
-
-    <div class="grade" id="grade"></div>
-
-    <p class="nota">O Compadre é o primeiro agente. A plataforma é aberta: governo, cooperativas e
-    pesquisadores publicam os seus — todos sobre a mesma camada.</p>
-  </div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+  <script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js" crossorigin></script>
+  <script src="ds/_ds_bundle.js"></script>
 
   <script>
-    const API = "http://127.0.0.1:8000/agentes";
+    /* ---- Dados do Hub: metadados de apresentação + fonte ao vivo ----
+     * A vitrine puxa os agentes do backend (GET /agentes). O backend devolve
+     * name/description/tools/operacional; os metadados visuais (ícone, tom,
+     * persona, detalhe, rastro) vivem aqui, casados por `name`. Sem backend,
+     * cai no FALLBACK — a tela continua filmável no pitch. */
+    const API_AGENTES = "http://127.0.0.1:8000/agentes";
+    const API_ANALISE = "http://127.0.0.1:8000/analise/demo";
 
-    // fallback (mesmo shape de GET /agentes) para a tela funcionar offline no pitch
-    const FALLBACK = [
-      { name: "compadre", description: "ajuda o produtor rural a entender e corrigir o CAR pelo WhatsApp",
-        persona: "Seu Raimundo (produtor)", tools: ["consultar_sicar","consultar_ontologia","traduzir_llm"], operacional: true },
-      { name: "auditor", description: "ajuda o analista do OEMA a checar pendências e gerar parecer",
-        persona: "Luana (analista ambiental)", tools: ["consultar_sicar","consultar_ontologia","analise_espacial"], operacional: false },
-      { name: "territorial", description: "déficit de Reserva Legal por município para o governo",
-        persona: "Gestor público", tools: ["consultar_ontologia","analise_espacial"], operacional: false },
-      { name: "credito", description: "carteira elegível a crédito verde para cooperativas",
-        persona: "Cooperativa de crédito", tools: ["consultar_ontologia","scoring"], operacional: false },
+    const ENRICH = {
+      compadre: {
+        title: "Compadre", persona: "Seu Raimundo (produtor)", icon: "message-circle",
+        tone: "pine", author: "Terra Comum",
+        detalhe: "Primeiro agente da plataforma. Conversa em linguagem simples, lê a situação do imóvel no SICAR e traduz cada pendência com a regra do Código Florestal por trás.",
+        rastro: { source: "Lei 12.651/2012, Art. 29, §1º", trace: "car:Pendencia_CIB" },
+      },
+      professor: {
+        title: "Professor", persona: "Todos (produtor, técnico, analista)", icon: "graduation-cap",
+        tone: "leaf", author: "Terra Comum",
+        detalhe: "Explica o Código Florestal em linguagem livre, adaptando o nível ao usuário. Usa a ontologia como base da verdade e pode elaborar além dos dados.",
+        rastro: { source: "Lei 12.651/2012, Art. 3º, II", trace: "car:ConceitoAPP" },
+      },
+      auditor: {
+        title: "Auditor", persona: "Luana (analista ambiental)", icon: "search-check",
+        tone: "emerald", author: "OEMA / parceria",
+        detalhe: "Cruza a geometria do imóvel com a ontologia e monta um rascunho de parecer técnico, já com as fontes legais citadas.",
+        rastro: { source: "Lei 12.651/2012, Art. 12", trace: "car:ReservaLegal" },
+      },
+      territorial: {
+        title: "Territorial", persona: "Gestor público", icon: "map",
+        tone: "leaf", author: "Governo (piloto)",
+        detalhe: "Agrega a mesma camada semântica em escala municipal: onde está o passivo ambiental e quanto falta regularizar.",
+        rastro: { source: "Lei 12.651/2012, Art. 12, §4º", trace: "car:DeficitRL_municipio" },
+      },
+      credito: {
+        title: "Crédito", persona: "Cooperativa de crédito", icon: "coins",
+        tone: "amber", author: "Cooperativa (piloto)",
+        detalhe: "Lê o CAR regularizado e identifica quais produtores destravam linhas de crédito verde (Pronaf Eco, PSA).",
+        rastro: { source: "Resolução BCB nº 140/2021", trace: "car:ElegibilidadeCredito" },
+      },
+      oportunidades: {
+        title: "Oportunidades", persona: "Produtor · cooperativa", icon: "sprout",
+        tone: "leaf", author: "Cooperativa (piloto)",
+        detalhe: "Mapeia programas e benefícios que o CAR regular libera para o produtor — crédito, PSA, CRA — e avalia a elegibilidade.",
+        rastro: { source: "Lei 12.651/2012, Art. 41", trace: "car:Beneficio_PSA" },
+      },
+      comunicador: {
+        title: "Comunicador", persona: "Governo (OEMAs, MDA)", icon: "megaphone",
+        tone: "emerald", author: "Governo (piloto)",
+        detalhe: "Envia campanhas, lembretes e notificações sobre o CAR em escala, personalizadas pela situação real de cada imóvel.",
+        rastro: { source: "Lei 12.651/2012, Art. 29, §3º", trace: "car:Notificacao" },
+      },
+    };
+
+    function enrich(a) {
+      const e = ENRICH[a.name] || {
+        title: a.name.charAt(0).toUpperCase() + a.name.slice(1),
+        persona: "—", icon: "bot", tone: "surface", author: "comunidade",
+        detalhe: a.description || "", rastro: { source: "—", trace: "car:—" },
+      };
+      return Object.assign({}, e, {
+        name: a.name,
+        description: a.description || e.detalhe,
+        tools: a.tools || [],
+        operacional: !!a.operacional,
+      });
+    }
+
+    // FALLBACK (espelha GET /agentes) — ordem define a exibição
+    const FALLBACK_AGENTES = [
+      { name: "compadre", description: "Ajuda o produtor rural a entender e corrigir o CAR pelo WhatsApp.", tools: ["consultar_sicar","consultar_ontologia","traduzir_llm"], operacional: true },
+      { name: "professor", description: "Tira dúvidas sobre o Código Florestal em linguagem livre.", tools: ["consultar_legislacao","explicar_conceitos","gerar_exemplos"], operacional: true },
+      { name: "auditor", description: "Ajuda o analista do OEMA a checar pendências e gerar parecer.", tools: ["consultar_sicar","consultar_ontologia","analise_espacial"], operacional: false },
+      { name: "territorial", description: "Déficit de Reserva Legal por município, para o governo.", tools: ["consultar_ontologia","analise_espacial"], operacional: false },
+      { name: "credito", description: "Carteira elegível a crédito verde, para cooperativas.", tools: ["consultar_ontologia","scoring"], operacional: false },
+      { name: "oportunidades", description: "Mapeia programas e benefícios que o CAR regular libera.", tools: ["consultar_ontologia","buscar_programas","scoring"], operacional: false },
+      { name: "comunicador", description: "Envia campanhas e lembretes personalizados sobre o CAR.", tools: ["consultar_ontologia","enviar_whatsapp","campanhas"], operacional: false },
     ];
 
-    const PERSONAS = { compadre: "Seu Raimundo (produtor)", auditor: "Luana (analista ambiental)",
-      territorial: "Gestor público", credito: "Cooperativa de crédito" };
-    const ICON = { compadre: "💬", auditor: "🔎", territorial: "🗺️", credito: "💰" };
-
-    function render(agentes) {
-      const grade = document.getElementById("grade");
-      grade.innerHTML = "";
-      for (const a of agentes) {
-        const card = document.createElement("div");
-        card.className = "card" + (a.operacional ? " ativo" : "");
-        const pill = a.operacional ? '<span class="pill on">ativo</span>' : '<span class="pill off">demonstrativo</span>';
-        const persona = a.persona || PERSONAS[a.name] || "";
-        const icon = ICON[a.name] || "🤖";
-        let tools = "";
-        for (const t of (a.tools||[])) tools += `<span class="tool">${t}</span>`;
-        const abrir = a.name === "compadre"
-          ? '<a class="abrir" href="index.html">Abrir o Compadre →</a>' : "";
-        card.innerHTML = `
-          <h3>${icon} ${a.name} ${pill}</h3>
-          <div class="persona">para: ${persona}</div>
-          <div>${a.description||""}</div>
-          <div class="tools">${tools}</div>
-          ${abrir}`;
-        grade.appendChild(card);
-      }
-    }
-
-    fetch(API).then(r => r.json()).then(render).catch(() => render(FALLBACK));
-
-    // --- painel de análise de APP (GET /analise/demo) ---
-    const API_ANALISE = "http://127.0.0.1:8000/analise/demo";
-    const ANALISE_FALLBACK = {
+    const FALLBACK_ANALISE = {
       faixa_exigida_m: 30, deficit_m2: 1800, deficit_ha: 0.18, conforme: false,
-      fonte: "Lei 12.651/2012, Art. 4º, I, alínea a", rastro_ontologia: "car:FaixaAPP_ate10"
+      fonte: "Lei 12.651/2012, Art. 4º, I, alínea a", rastro_ontologia: "car:FaixaAPP_ate10",
     };
-    function renderAnalise(a) {
-      const cls = a.conforme ? "ok" : "alerta";
-      const status = a.conforme ? "conforme" : "déficit";
-      document.getElementById("analise-corpo").innerHTML = `
-        <div class="metric-row">
-          <div class="metric"><div class="v">${a.faixa_exigida_m} m</div><div class="l">faixa de APP exigida (da ontologia)</div></div>
-          <div class="metric"><div class="v ${cls}">${a.deficit_m2} m²</div><div class="l">déficit de mata ciliar (${status})</div></div>
-          <div class="metric"><div class="v ${cls}">${a.deficit_ha} ha</div><div class="l">em hectares</div></div>
-        </div>
-        <div class="fonte">📖 ${a.fonte} &nbsp; <code>${a.rastro_ontologia}</code></div>`;
+  </script>
+
+  <script type="text/babel">
+    const { Card, Avatar, Badge, Tag, Button, Metric, TraceSeal } = window.TerraComumDesignSystem_e77cb3;
+
+    /* ---------- HubShell: sidebar de marca + topbar + slot ---------- */
+    function NavItem({ icon, label, active, badge, onClick }) {
+      const [hover, setHover] = React.useState(false);
+      return (
+        <button onClick={onClick} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+          style={{ display: "flex", alignItems: "center", gap: 11, width: "100%", padding: "9px 12px",
+            borderRadius: "var(--radius-sm)", border: "1px solid " + (active ? "var(--border-subtle)" : "transparent"),
+            background: active ? "var(--surface-card)" : (hover ? "rgba(255,255,255,.04)" : "transparent"),
+            color: active ? "var(--text-strong)" : "var(--text-muted)",
+            font: "var(--fw-semibold) var(--text-sm)/1 var(--font-sans)", cursor: "pointer", textAlign: "left",
+            transition: "background .15s, color .15s" }}>
+          <i data-lucide={icon} style={{ width: 17, height: 17, color: active ? "var(--accent)" : "currentColor", flex: "none" }}></i>
+          <span style={{ flex: 1 }}>{label}</span>
+          {badge != null && <span style={{ font: "var(--fw-bold) 11px var(--font-mono)", color: active ? "var(--accent)" : "var(--text-faint)" }}>{badge}</span>}
+        </button>
+      );
     }
-    fetch(API_ANALISE).then(r => r.json()).then(renderAnalise).catch(() => renderAnalise(ANALISE_FALLBACK));
+
+    function HubShell({ children, nav, onNav, env, count, onNewAgent }) {
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+      return (
+        <div style={{ display: "grid", gridTemplateColumns: "248px 1fr", minHeight: "100vh", background: "var(--bg-base)" }}>
+          <aside style={{ background: "var(--surface-inset)", borderRight: "1px solid var(--border-subtle)",
+            display: "flex", flexDirection: "column", padding: "20px 16px", position: "sticky", top: 0, height: "100vh" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 11, padding: "2px 6px 20px" }}>
+              <span style={{ width: 38, height: 38, borderRadius: 11, background: "var(--pine-500)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none", overflow: "hidden" }}>
+                <img src="ds/assets/leaf-mark-cut.png" alt="" style={{ width: "82%", height: "82%", objectFit: "contain" }} />
+              </span>
+              <div style={{ lineHeight: 1.15 }}>
+                <div style={{ font: "var(--fw-bold) 16px/1 var(--font-display)", color: "var(--text-strong)", letterSpacing: "-.02em" }}>
+                  Terra <span style={{ color: "var(--accent)" }}>Comum</span>
+                </div>
+                <div style={{ font: "var(--fw-semibold) 9.5px var(--font-sans)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginTop: 3 }}>Agent Hub</div>
+              </div>
+            </div>
+
+            <div style={{ font: "var(--fw-semibold) 10px var(--font-sans)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", padding: "0 6px 8px" }}>Plataforma</div>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <NavItem icon="layout-grid" label="Agentes" badge={count} active={nav === "agentes"} onClick={() => onNav && onNav("agentes")} />
+              <NavItem icon="git-fork" label="Ontologia" active={nav === "ontologia"} onClick={() => onNav && onNav("ontologia")} />
+              <NavItem icon="satellite" label="Validação" active={nav === "validacao"} onClick={() => onNav && onNav("validacao")} />
+              <NavItem icon="map" label="Território" active={nav === "territorio"} onClick={() => onNav && onNav("territorio")} />
+            </nav>
+
+            <div style={{ marginTop: 18, font: "var(--fw-semibold) 10px var(--font-sans)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", padding: "0 6px 8px" }}>Aberto</div>
+            <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              <NavItem icon="book-open" label="Documentação" onClick={() => {}} />
+              <NavItem icon="globe" label="Bem público (DPG)" onClick={() => {}} />
+            </nav>
+
+            <div style={{ marginTop: "auto", paddingTop: 16 }}>
+              <div style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "11px 12px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                  <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)", boxShadow: "0 0 8px var(--accent)" }}></span>
+                  <span style={{ font: "var(--fw-bold) 11px var(--font-sans)", color: "var(--text-body)" }}>ontologia carregada</span>
+                </div>
+                <code style={{ display: "block", font: "10.5px var(--font-mono)", color: "var(--text-faint)", marginTop: 6 }}>backend/ontologia/car.ttl</code>
+              </div>
+            </div>
+          </aside>
+
+          <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+            <header style={{ display: "flex", alignItems: "center", gap: 16, padding: "0 28px", height: 64,
+              borderBottom: "1px solid var(--border-subtle)", background: "rgba(12,28,22,.72)", backdropFilter: "blur(10px)", position: "sticky", top: 0, zIndex: 5 }}>
+              <div style={{ font: "var(--fw-bold) 15px var(--font-display)", color: "var(--text-strong)" }}>Agentes</div>
+              <div style={{ flex: 1 }}></div>
+              <label style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--surface-inset)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-pill)", padding: "7px 14px", width: 260, color: "var(--text-faint)" }}>
+                <i data-lucide="search" style={{ width: 15, height: 15 }}></i>
+                <input placeholder="Buscar agente ou regra…" style={{ border: "none", background: "transparent", outline: "none", color: "var(--text-body)", font: "13px var(--font-sans)", flex: 1 }} />
+              </label>
+              <Badge tone={env === "ao vivo" ? "active" : "muted"} dot>{env || "demo"}</Badge>
+              <Button variant="primary" size="sm" icon={<i data-lucide="plus"></i>} onClick={onNewAgent}>Publicar agente</Button>
+            </header>
+
+            <main style={{ padding: "28px", flex: 1, maxWidth: 1180, width: "100%" }}>{children}</main>
+          </div>
+        </div>
+      );
+    }
+
+    /* ---------- AgentCard ---------- */
+    function AgentCard({ agent, selected, onOpen, onSelect }) {
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+      return (
+        <Card active={selected} interactive onClick={() => onSelect && onSelect(agent.name)} style={{ cursor: "pointer", display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+            <Avatar tone={agent.tone} size={46} icon={<i data-lucide={agent.icon}></i>} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ font: "var(--fw-bold) 17px var(--font-display)", color: "var(--text-strong)", letterSpacing: "-.01em" }}>{agent.title}</span>
+                {agent.operacional ? <Badge tone="active" dot>ativo</Badge> : <Badge tone="muted">demonstrativo</Badge>}
+              </div>
+              <div style={{ font: "12px var(--font-sans)", color: "var(--text-faint)", marginTop: 3 }}>para: {agent.persona}</div>
+            </div>
+          </div>
+          <p style={{ font: "13.5px/1.5 var(--font-sans)", color: "var(--text-body)", margin: "13px 0 0" }}>{agent.description}</p>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", margin: "13px 0 0" }}>
+            {agent.tools.map((t) => <Tag key={t}>{t}</Tag>)}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 15, paddingTop: 14, borderTop: "1px solid var(--border-hairline)" }}>
+            <span style={{ font: "11px var(--font-sans)", color: "var(--text-faint)", display: "flex", alignItems: "center", gap: 5 }}>
+              <i data-lucide="user-round" style={{ width: 13, height: 13 }}></i>{agent.author}
+            </span>
+            <div style={{ flex: 1 }}></div>
+            {agent.operacional
+              ? <Button variant="primary" size="sm" iconRight={<i data-lucide="arrow-right"></i>} onClick={(e) => { e.stopPropagation(); onOpen && onOpen(agent); }}>Abrir</Button>
+              : <Button variant="ghost" size="sm" onClick={(e) => { e.stopPropagation(); onSelect && onSelect(agent.name); }}>Detalhes</Button>}
+          </div>
+        </Card>
+      );
+    }
+
+    /* ---------- ValidationPanel ---------- */
+    function ValidationPanel({ analise }) {
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+      const a = analise;
+      const tone = a.conforme ? "ok" : "alert";
+      const status = a.conforme ? "conforme" : "déficit";
+      return (
+        <Card style={{ padding: "var(--space-6)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
+            <span style={{ width: 38, height: 38, borderRadius: 11, background: "rgba(47,211,154,.14)", display: "flex", alignItems: "center", justifyContent: "center", flex: "none" }}>
+              <i data-lucide="satellite" style={{ width: 19, height: 19, color: "var(--accent)" }}></i>
+            </span>
+            <div style={{ flex: 1 }}>
+              <h2 style={{ font: "var(--fw-bold) 18px var(--font-display)", color: "var(--text-strong)" }}>Validação antecipada</h2>
+              <div style={{ font: "12.5px var(--font-sans)", color: "var(--text-muted)", marginTop: 2 }}>
+                A plataforma <b style={{ color: "var(--text-body)" }}>descobre</b> o problema — geometria × ontologia — antes do produtor enviar.
+              </div>
+            </div>
+            <Badge tone={a.conforme ? "active" : "alert"} dot>{status}</Badge>
+          </div>
+          <div style={{ display: "flex", gap: 12, marginTop: 18, flexWrap: "wrap" }}>
+            <Metric value={a.faixa_exigida_m} unit="m" label="faixa de APP exigida (da ontologia)" />
+            <Metric value={Number(a.deficit_m2).toLocaleString("pt-BR")} unit="m²" tone={tone} label={"déficit de mata ciliar (" + status + ")"} />
+            <Metric value={a.deficit_ha} unit="ha" tone={tone} label="em hectares" />
+          </div>
+          <div style={{ marginTop: 16 }}>
+            <TraceSeal tone="alert" icon={<i data-lucide="book-open"></i>} title="Regra aplicada" source={a.fonte} trace={a.rastro_ontologia} />
+          </div>
+        </Card>
+      );
+    }
+
+    /* ---------- AgentDetail (drawer) ---------- */
+    function FieldLabel({ icon, label }) {
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: 7, font: "var(--fw-semibold) 10.5px var(--font-sans)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>
+          <i data-lucide={icon} style={{ width: 13, height: 13 }}></i>{label}
+        </div>
+      );
+    }
+    function Field({ label, icon, children }) {
+      return (<div><FieldLabel icon={icon} label={label} /><p style={{ font: "14px/1.55 var(--font-sans)", color: "var(--text-body)", margin: "8px 0 0" }}>{children}</p></div>);
+    }
+    function AgentDetail({ agent, onClose, onOpen }) {
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+      const open = !!agent;
+      return (
+        <>
+          <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(6,16,12,.55)", backdropFilter: "blur(2px)",
+            opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none", transition: "opacity .25s", zIndex: 40 }}></div>
+          <aside style={{ position: "fixed", top: 0, right: 0, height: "100vh", width: 420, maxWidth: "92vw",
+            background: "var(--bg-canvas)", borderLeft: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-lg)", zIndex: 41,
+            transform: open ? "translateX(0)" : "translateX(100%)", transition: "transform .3s var(--ease-out)", display: "flex", flexDirection: "column" }}>
+            {agent && (
+              <>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "20px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
+                  <Avatar tone={agent.tone} size={48} icon={<i data-lucide={agent.icon}></i>} />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ font: "var(--fw-bold) 20px var(--font-display)", color: "var(--text-strong)" }}>{agent.title}</span>
+                      {agent.operacional ? <Badge tone="active" dot>ativo</Badge> : <Badge tone="muted">demonstrativo</Badge>}
+                    </div>
+                    <code style={{ font: "11px var(--font-mono)", color: "var(--text-faint)" }}>{agent.name}.yaml</code>
+                  </div>
+                  <button onClick={onClose} style={{ border: "none", background: "transparent", color: "var(--text-muted)", cursor: "pointer", padding: 4, display: "flex" }}>
+                    <i data-lucide="x" style={{ width: 20, height: 20 }}></i>
+                  </button>
+                </div>
+                <div style={{ padding: "22px", overflowY: "auto", flex: 1, display: "flex", flexDirection: "column", gap: 20 }}>
+                  <Field label="Para quem" icon="user-round">{agent.persona}</Field>
+                  <Field label="O que faz" icon="sparkles">{agent.detalhe}</Field>
+                  <div>
+                    <FieldLabel icon="wrench" label="Ferramentas" />
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 9 }}>{agent.tools.map((t) => <Tag key={t}>{t}</Tag>)}</div>
+                  </div>
+                  <div>
+                    <FieldLabel icon="shield-check" label="Exemplo de rastreabilidade" />
+                    <div style={{ marginTop: 9 }}><TraceSeal icon={<i data-lucide="book-open"></i>} source={agent.rastro.source} trace={agent.rastro.trace} /></div>
+                  </div>
+                  <div style={{ background: "var(--surface-inset)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "13px 15px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, font: "12px var(--font-sans)", color: "var(--text-muted)" }}>
+                      <i data-lucide="git-fork" style={{ width: 15, height: 15, color: "var(--accent)" }}></i>
+                      Raciocina sobre <code style={{ font: "11.5px var(--font-mono)", color: "var(--mint-400)" }}>car.ttl</code> — a mesma ontologia de todos os agentes.
+                    </div>
+                  </div>
+                </div>
+                <div style={{ padding: "16px 22px", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 10 }}>
+                  {agent.operacional
+                    ? <Button variant="primary" iconRight={<i data-lucide="arrow-right"></i>} onClick={() => onOpen && onOpen(agent)} style={{ flex: 1 }}>Abrir o {agent.title}</Button>
+                    : <Button variant="secondary" icon={<i data-lucide="rocket"></i>} style={{ flex: 1 }}>Solicitar piloto</Button>}
+                </div>
+              </>
+            )}
+          </aside>
+        </>
+      );
+    }
+
+    /* ---------- Ontology banner ---------- */
+    function OntologyBanner() {
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 18,
+          background: "linear-gradient(90deg, rgba(1,105,59,.30), var(--surface-card))",
+          border: "1px solid var(--border-subtle)", borderLeft: "3px solid var(--leaf-500)",
+          borderRadius: "var(--radius-md)", padding: "16px 20px" }}>
+          <i data-lucide="git-fork" style={{ width: 22, height: 22, color: "var(--leaf-500)", flex: "none" }}></i>
+          <div style={{ flex: 1 }}>
+            <div style={{ font: "var(--fw-semibold) 14.5px var(--font-sans)", color: "var(--text-strong)" }}>
+              Todos os agentes raciocinam sobre a <span style={{ color: "var(--leaf-400)" }}>mesma ontologia do CAR</span>.
+            </div>
+            <code style={{ font: "11.5px var(--font-mono)", color: "var(--text-faint)" }}>backend/ontologia/car.ttl — regras do Código Florestal, rastreáveis</code>
+          </div>
+        </div>
+      );
+    }
+
+    /* ---------- Hub (root) ---------- */
+    function Hub() {
+      const [agents, setAgents] = React.useState(FALLBACK_AGENTES.map(enrich));
+      const [analise, setAnalise] = React.useState(FALLBACK_ANALISE);
+      const [env, setEnv] = React.useState("demo");
+      const [selected, setSelected] = React.useState(null);
+      const [nav, setNav] = React.useState("agentes");
+      const [toast, setToast] = React.useState("");
+
+      React.useEffect(() => {
+        fetch(API_AGENTES).then(r => r.json()).then(data => {
+          if (Array.isArray(data) && data.length) { setAgents(data.map(enrich)); setEnv("ao vivo"); }
+        }).catch(() => {});
+        fetch(API_ANALISE).then(r => r.json()).then(setAnalise).catch(() => {});
+      }, []);
+
+      React.useEffect(() => { window.lucide && lucide.createIcons(); });
+
+      const selectedAgent = agents.find((a) => a.name === selected) || null;
+
+      const fireToast = (msg) => {
+        setToast(msg || "Publicar um agente é escrever um manifesto YAML.");
+        clearTimeout(window.__t);
+        window.__t = setTimeout(() => setToast(""), 2800);
+      };
+
+      // agente operacional: Compadre abre o chat; Professor também vive no chat
+      const abrirAgente = (agent) => {
+        setSelected(null);
+        if (agent.name === "compadre" || agent.name === "professor") {
+          fireToast("Abrindo o " + agent.title + "…");
+          setTimeout(() => { window.location.href = "index.html"; }, 650);
+        } else {
+          fireToast("Abrindo o " + agent.title + "…");
+        }
+      };
+
+      return (
+        <HubShell nav={nav} onNav={setNav} env={env} count={agents.length} onNewAgent={() => fireToast()}>
+          <section className="hero">
+            <div className="eyebrow">Soluções para o Cadastro Ambiental Rural</div>
+            <h1>Agent <em>Hub</em></h1>
+            <p>Uma camada semântica aberta. Múltiplos agentes. O mesmo conhecimento do território.</p>
+            <OntologyBanner />
+          </section>
+
+          <div className="sec-head">
+            <h2>Agentes na plataforma</h2>
+            <span className="count">{agents.length}</span>
+            <span className="rule"></span>
+            <span style={{ font: "12px var(--font-sans)", color: "var(--text-faint)" }}>governo · cooperativas · pesquisa</span>
+          </div>
+          <div className="grid">
+            {agents.map((a) => (
+              <AgentCard key={a.name} agent={a} selected={selected === a.name} onSelect={setSelected} onOpen={abrirAgente} />
+            ))}
+          </div>
+
+          <div className="sec-head">
+            <h2>Validação antecipada</h2>
+            <span className="rule"></span>
+          </div>
+          <ValidationPanel analise={analise} />
+
+          <p className="foot">
+            O Compadre é o primeiro agente. A plataforma é aberta: governo, cooperativas e
+            pesquisadores publicam os seus — todos sobre a mesma camada.
+          </p>
+
+          <AgentDetail agent={selectedAgent} onClose={() => setSelected(null)} onOpen={abrirAgente} />
+
+          <div className={"toast" + (toast ? " show" : "")}>
+            <i data-lucide="leaf" style={{ color: "var(--accent)" }}></i>
+            {toast}
+          </div>
+        </HubShell>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<Hub />);
   </script>
 </body>
 </html>

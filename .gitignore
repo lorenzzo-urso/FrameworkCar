@@ -4,3 +4,6 @@
 # Scripts locais de inicialização (não commitar)
 iniciar.bat
 *.bat
+
+# Pasta-fonte do design system (o runtime usado vive em poc/web/ds/)
+Terra Comum Design System/

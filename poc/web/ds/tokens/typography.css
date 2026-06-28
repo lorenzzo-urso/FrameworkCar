@@ -1,0 +1,38 @@
+/* Terra Comum — Typography tokens */
+:root {
+  --font-display: "Space Grotesk", "Hanken Grotesk", system-ui, sans-serif;
+  --font-sans:    "Hanken Grotesk", system-ui, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  /* Type scale */
+  --text-2xs: 10px;
+  --text-xs:  11.5px;
+  --text-sm:  13px;
+  --text-base: 15px;
+  --text-md:  17px;
+  --text-lg:  20px;
+  --text-xl:  26px;
+  --text-2xl: 34px;
+  --text-3xl: 46px;
+  --text-4xl: 60px;
+
+  /* Weights */
+  --fw-regular: 400; /* @kind other */
+  --fw-medium: 500;  /* @kind other */
+  --fw-semibold: 600;/* @kind other */
+  --fw-bold: 700;    /* @kind other */
+  --fw-black: 800;   /* @kind other */
+
+  /* Line heights */
+  --leading-tight: 1.1;
+  --leading-snug: 1.28;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Tracking */
+  --tracking-display: -0.03em;
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-eyebrow: 0.14em; /* uppercase labels, e.g. SOLUÇÕES PARA O CAR */
+}

@@ -1,0 +1,11 @@
+/* Terra Comum — Webfonts
+ * Loaded from Google Fonts via CDN. SUBSTITUTION FLAG: the haCARthon
+ * wordmark is a custom geometric sans we could not source; Space Grotesk
+ * is used as the nearest display match. Replace the @import with bundled
+ * @font-face binaries if licensed originals are provided.
+ *
+ *  Display  → Space Grotesk   (headings, numerals, wordmark feel)
+ *  UI/body  → Hanken Grotesk   (humanist grotesk, legible at small sizes)
+ *  Mono     → JetBrains Mono   (ontology refs, tool chips, console)
+ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');

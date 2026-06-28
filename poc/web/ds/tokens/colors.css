@@ -1,0 +1,78 @@
+/* Terra Comum — Color tokens
+ * Dark-first platform palette grounded in the haCARthon brand:
+ * vivid pine green (#01693b), fresh leaf green (#4fb748), and the
+ * hub's interactive emerald (#2fd39a). Neutrals are cool, green-tinted.
+ */
+:root {
+  /* ---- Forest neutrals (backgrounds / surfaces / borders) ---- */
+  --forest-950: #0a1813; /* deepest canvas */
+  --forest-900: #0c1c16;
+  --forest-850: #0f241f; /* inset / well */
+  --forest-800: #142c25;
+  --forest-750: #16302a; /* card surface */
+  --forest-700: #1b3a31; /* raised surface */
+  --forest-650: #1f463a;
+  --forest-600: #245046; /* hairline / subtle border */
+  --forest-500: #2f6357;
+
+  /* ---- Pine (primary brand green, from the header field) ---- */
+  --pine-600: #015c34;
+  --pine-500: #01693b;
+  --pine-400: #1c8050;
+
+  /* ---- Leaf (fresh green, from the haCARthon wordmark) ---- */
+  --leaf-500: #4fb748;
+  --leaf-400: #6ccb5f;
+
+  /* ---- Emerald (interactive accent, from the hub) ---- */
+  --emerald-600: #1f9e74;
+  --emerald-500: #2fd39a;
+  --emerald-400: #54e0b0;
+  --mint-400: #79c9ad; /* secondary accent / mono ink */
+
+  /* ---- Mist (foreground text on dark) ---- */
+  --mist-50:  #eef7f2;
+  --mist-100: #e8f3ee;
+  --mist-200: #c9ddd4;
+  --mist-300: #93b3a8;
+  --mist-400: #6f9488;
+  --mist-500: #4e6b62;
+
+  /* ---- Earth semantics (alert / déficit) ---- */
+  --amber-500: #ff8a5b;
+  --amber-600: #c0561f;
+  --rust-700: #9c4a18;
+
+  /* ============ Semantic aliases ============ */
+  --bg-base:        var(--forest-950);
+  --bg-canvas:      var(--forest-900);
+  --surface-card:   var(--forest-750);
+  --surface-inset:  var(--forest-850);
+  --surface-raised: var(--forest-700);
+
+  --border-subtle:  var(--forest-600);
+  --border-hairline: rgba(121, 201, 173, .14);
+  --border-accent:  var(--emerald-600);
+
+  --text-strong: var(--mist-100);
+  --text-body:   var(--mist-200);
+  --text-muted:  var(--mist-300);
+  --text-faint:  var(--mist-400);
+
+  --accent:       var(--emerald-500);
+  --accent-hover: var(--emerald-400);
+  --accent-ink:   #08231b; /* text on emerald fills */
+  --brand:        var(--pine-500);
+  --leaf:         var(--leaf-500);
+
+  --ok:         var(--emerald-500);
+  --alert:      var(--amber-500);
+  --alert-deep: var(--amber-600);
+
+  --ring: rgba(47, 211, 154, .42);
+
+  /* mono / ontology accents */
+  --code-fg:    var(--mint-400);
+  --code-rule:  var(--amber-500);   /* legal source */
+  --code-trace: #c8a8ef;            /* ontology ref (car:…) */
+}
