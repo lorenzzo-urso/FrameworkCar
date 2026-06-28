@@ -1,9 +1,11 @@
 # CarFramework — Terra Comum / Compadre
 
-> **Não construímos um táxi. Construímos a estrada.**
+> **O território já tinha fronteiras. Faltava a linguagem para lê-las.**
 
 Protocolo aberto de agentes especializados sobre um grafo de conhecimento compartilhado
 do território rural brasileiro — construído sobre o RER open-source do governo federal.
+
+**Demo online →** [lorenzzo-urso.github.io/CarFramework/hub.html](https://lorenzzo-urso.github.io/CarFramework/hub.html)
 
 ---
 
@@ -86,14 +88,31 @@ ficam corretos automaticamente. Nenhum chatbot existente faz isso.
 
 O PoC foi construído durante o haCARthon com geometria real de MG (Alvinópolis, 41,7 ha).
 
-| Capacidade | |
+A plataforma funciona em dois modos:
+
+### Modo estático — [demo online](https://lorenzzo-urso.github.io/CarFramework/hub.html)
+
+Disponível sem instalar nada. Tudo que é visual e navegável:
+
+| Disponível | |
 |---|---|
-| Análise de déficit de APP por geometria real | o sistema **calcula** o problema — não repete o que o governo diz |
-| Rastreabilidade completa | toda resposta cita a regra (`car:FaixaAPP_ate10 · Lei 12.651/2012, Art. 4º, I, a`) |
-| LLM grounded na ontologia | o modelo traduz a regra — nunca a inventa |
-| Separação evidência / interpretação | o Compadre distingue o que calculou do que é decreto |
-| Delegação automática de agentes | perguntas conceituais vão ao Professor; consultas pessoais ficam no Compadre |
-| Agent Hub com manifesto YAML | trocar o arquivo muda o agente — sem tocar o código |
+| Agent Hub completo | 6 páginas navegáveis — Agentes, Protocolo, Governança, Ecossistemas, Docs, DPG |
+| Cards dos 7 agentes | com detalhes, ferramentas e rastreabilidade de cada um |
+| Mapa territorial | 8 imóveis rurais com status de CAR (conforme / déficit / pendente) |
+| Arquitetura e fontes | documentação das 5 bases de dados abertas e 8 conceitos da ontologia |
+| Interface do Compadre | chat simulado com resposta de demonstração pré-carregada |
+
+### Modo completo — com backend local
+
+Com `uvicorn` rodando, tudo acima **mais**:
+
+| Desbloqueado | |
+|---|---|
+| Compadre ao vivo | conversa real com Claude Haiku 4.5, grounded na ontologia |
+| Análise de APP em tempo real | geometria real × ontologia → déficit calculado na hora |
+| Delegação automática | Professor responde conceptual; Compadre responde sobre o imóvel |
+| Badge "ao vivo" no Hub | confirma que o backend está conectado |
+| `/docs` interativo | Swagger UI com todos os schemas e exemplos executáveis |
 
 ### Os agentes do Hub
 
@@ -164,26 +183,39 @@ As fontes de dados viram os sentidos.
 ## Como rodar localmente
 
 ```bash
-# clone
 git clone https://github.com/lorenzzo-urso/CarFramework.git
 cd CarFramework
+```
 
-# backend (Python + FastAPI)
+**Só o frontend (modo estático):**
+```bash
+cd poc/web
+python -m http.server 3000
+# Abre em http://localhost:3000  →  Hub com dados de demonstração
+```
+
+**Frontend + backend (modo completo):**
+```bash
+# terminal 1 — backend
 cd poc/backend
 python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn api:app --reload --port 8000
 
-# frontend (janela separada)
+# terminal 2 — frontend
 cd poc/web
 python -m http.server 3000
 ```
 
-Abra `http://localhost:3000` e fale com o Compadre.
-A documentação da API fica em `http://localhost:8000/docs`.
+| URL | O que abre |
+|---|---|
+| `http://localhost:3000` | Hub — página inicial |
+| `http://localhost:3000/compadre.html` | Chat do Compadre |
+| `http://localhost:8000/docs` | Swagger UI da API |
 
-> Sem backend no ar, o frontend usa uma resposta de demonstração com o mesmo
-> contrato JSON — a tela funciona offline para demonstração.
+> Com o backend no ar, o Hub exibe o badge **"ao vivo"** e todas as respostas
+> são geradas em tempo real. Sem backend, o Hub cai automaticamente para o
+> modo demonstração — mesma aparência, dados pré-carregados.
 
 ---
 
