@@ -372,7 +372,7 @@
                 </div>
                 <div style={{ padding: "16px 22px", borderTop: "1px solid var(--border-subtle)", display: "flex", gap: 10 }}>
                   {agent.operacional
-                    ? <Button variant="primary" iconRight={<i data-lucide="arrow-right"></i>} onClick={() => onOpen && onOpen(agent)} style={{ flex: 1 }}>Abrir o {agent.title}</Button>
+                    ? <Button variant="primary" iconRight={<i data-lucide="arrow-right"></i>} onClick={() => onOpen && onOpen(agent)} style={{ flex: 1, color: "#FFFFFF" }}>Abrir o {agent.title}</Button>
                     : <Button variant="secondary" icon={<i data-lucide="rocket"></i>} style={{ flex: 1 }}>Solicitar piloto</Button>}
                 </div>
               </>
