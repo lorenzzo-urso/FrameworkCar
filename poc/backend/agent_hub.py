@@ -16,6 +16,7 @@ from consultar_sicar import consultar_sicar
 from consultar_ontologia import Ontologia
 from traduzir_llm import traduzir
 from analise_app import analisar_geometria_fixture
+from professor_llm import perguntar as perguntar_professor
 
 AGENTS_DIR = Path(__file__).parent / "agents"
 
@@ -30,6 +31,9 @@ class AgentHub:
             "consultar_sicar": consultar_sicar,
             "consultar_ontologia": self.ontologia,
             "traduzir_llm": traduzir,
+            "consultar_legislacao": self.ontologia.contexto_completo,
+            "explicar_conceitos": perguntar_professor,
+            "gerar_exemplos": perguntar_professor,
         }
         self.agentes = {}
         for manifesto in AGENTS_DIR.glob("*.yaml"):
@@ -67,10 +71,17 @@ class AgentHub:
     def run_agent(self, nome: str, numero_car: str, mensagem: str) -> dict:
         if nome not in self.agentes:
             return {"erro": f"Agente '{nome}' não registrado no Hub"}
-        if nome != "compadre":
-            # outros agentes existem como manifesto (vitrine), mas não rodam no PoC
-            return {"erro": f"Agente '{nome}' é demonstrativo — não executável no PoC"}
-        return self._pipeline_compadre(numero_car, mensagem)
+        if nome == "compadre":
+            return self._pipeline_compadre(numero_car, mensagem)
+        if nome == "professor":
+            return self._pipeline_professor(mensagem)
+        # demais agentes existem como manifesto (vitrine)
+        return {"erro": f"Agente '{nome}' é demonstrativo — não executável no PoC"}
+
+    def _pipeline_professor(self, pergunta: str) -> dict:
+        """Pipeline do Professor: pergunta livre → ontologia → LLM explica."""
+        resposta = perguntar_professor(pergunta, self.ontologia)
+        return {"resposta": resposta, "agente": "professor"}
 
     def _pipeline_compadre(self, numero_car: str, mensagem: str) -> dict:
         """Orquestração do Compadre: SICAR -> ontologia -> LLM. Cada passo usa

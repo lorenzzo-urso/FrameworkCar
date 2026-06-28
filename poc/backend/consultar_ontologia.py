@@ -141,6 +141,73 @@ class Ontologia:
             }
         return {"erro": f"Pendência '{codigo}' não mapeada na ontologia"}
 
+    # ----- Contexto completo (para o Professor) --------------------------
+
+    def contexto_completo(self) -> dict:
+        """Despeja todo o conhecimento da ontologia para uso livre pelo Professor."""
+        ctx: dict = {"app_hidrica": [], "app_nascente": None,
+                     "reserva_legal": [], "pendencias": [], "beneficios": []}
+
+        for faixa in self.g.subjects(object=CAR.FaixaAPP):
+            lo = self.g.value(faixa, CAR.larguraRioMin)
+            hi = self.g.value(faixa, CAR.larguraRioMax)
+            fpm = self.g.value(faixa, CAR.faixaProtegidaMetros)
+            ctx["app_hidrica"].append({
+                "largura_rio_min_m": float(lo) if lo else None,
+                "largura_rio_max_m": float(hi) if hi else None,
+                "faixa_protegida_m": int(fpm) if fpm else None,
+                "explicacao": self._str(faixa, RDFS.comment),
+                "fonte": self._str(faixa, DCTERMS.source),
+                "rastro_ontologia": self._rastro(faixa),
+            })
+
+        for n in self.g.subjects(object=CAR.FaixaAPPNascente):
+            ctx["app_nascente"] = {
+                "raio_protegido_m": int(self.g.value(n, CAR.raioProtegidoMetros)),
+                "explicacao": self._str(n, RDFS.comment),
+                "fonte": self._str(n, DCTERMS.source),
+            }
+
+        q_rl = """
+        PREFIX car: <https://terracomum.org/car#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX dct:  <http://purl.org/dc/terms/>
+        SELECT ?regra ?pct ?comentario ?fonte ?amaz ?veg WHERE {
+            ?regra car:percentualMinimo ?pct ;
+                   rdfs:comment ?comentario .
+            OPTIONAL { ?regra dct:source ?fonte }
+            OPTIONAL { ?regra car:amazoniaLegal ?amaz }
+            OPTIONAL { ?regra car:tipoVegetacao ?veg }
+        }"""
+        for row in self.g.query(q_rl):
+            ctx["reserva_legal"].append({
+                "percentual_minimo": int(row.pct),
+                "amazonia_legal": bool(row.amaz) if row.amaz else False,
+                "tipo_vegetacao": str(row.veg) if row.veg else "qualquer",
+                "explicacao": str(row.comentario),
+                "fonte": str(row.fonte) if row.fonte else None,
+            })
+
+        q_pend = """
+        PREFIX car: <https://terracomum.org/car#>
+        PREFIX dct: <http://purl.org/dc/terms/>
+        SELECT ?p ?cod ?expl ?oqf ?fonte WHERE {
+            ?p car:codigo ?cod ;
+               car:explicacao ?expl ;
+               car:oQueFazer ?oqf .
+            OPTIONAL { ?p dct:source ?fonte }
+        }"""
+        for row in self.g.query(q_pend):
+            ctx["pendencias"].append({
+                "codigo": str(row.cod),
+                "explicacao": str(row.expl),
+                "o_que_fazer": str(row.oqf),
+                "fonte": str(row.fonte) if row.fonte else None,
+            })
+
+        ctx["beneficios"] = self.beneficios("Ativo")
+        return ctx
+
     # ----- Benefícios ----------------------------------------------------
 
     def beneficios(self, situacao_car: str = "Ativo") -> list:

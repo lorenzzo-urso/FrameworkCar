@@ -35,5 +35,5 @@ spec:
   output: explicacao_acessivel
 
   runtime:
-    protocol: ~
+    protocol: hub_interno
     endpoint: ~
