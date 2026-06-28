@@ -356,6 +356,96 @@
     }
 
     /* =====================================================
+       ONTOLOGY GRAPH
+    ===================================================== */
+    function OntologyGraph() {
+      const W = 900, H = 340, NW = 168, NH = 60, GAP = 10;
+
+      const nodes = [
+        { id: "imovel", cx: 450, cy: 155, uri: "car:Imovel",              label: "Imóvel Rural",       main: true },
+        { id: "app",    cx: 190, cy: 54,  uri: "car:FaixaAPP_ate10",      label: "Faixa APP ≤ 10m",    fonte: "Art. 4º, I, a" },
+        { id: "rl",     cx: 710, cy: 54,  uri: "car:ReservaLegal",         label: "Reserva Legal",      fonte: "Art. 12" },
+        { id: "pen",    cx: 128, cy: 272, uri: "car:Pendencia_CIB",        label: "Pendência CIB",      fonte: "Art. 29, §1º" },
+        { id: "psa",    cx: 450, cy: 304, uri: "car:Beneficio_PSA",        label: "Benefício PSA",      fonte: "Art. 41" },
+        { id: "cred",   cx: 772, cy: 272, uri: "car:ElegibilidadeCredito", label: "Crédito Verde",      fonte: "Res. BCB 140" },
+      ];
+
+      const edges = [
+        { from: "imovel", to: "app",  label: "temAPP" },
+        { from: "imovel", to: "rl",   label: "temRL" },
+        { from: "imovel", to: "pen",  label: "temPendencia" },
+        { from: "imovel", to: "psa",  label: "liberaAcesso" },
+        { from: "imovel", to: "cred", label: "habilitaCredito" },
+      ];
+
+      const nm = Object.fromEntries(nodes.map(n => [n.id, n]));
+
+      function ep(fId, tId) {
+        const f = nm[fId], t = nm[tId];
+        const dx = t.cx - f.cx, dy = t.cy - f.cy;
+        const d = Math.sqrt(dx*dx + dy*dy) || 1;
+        const ux = dx/d, uy = dy/d;
+        const au = Math.abs(ux) || 1e-9, av = Math.abs(uy) || 1e-9;
+        const bd = Math.min((NW/2)/au, (NH/2)/av);
+        return {
+          x1: f.cx + ux*bd,         y1: f.cy + uy*bd,
+          x2: t.cx - ux*(bd+GAP),   y2: t.cy - uy*(bd+GAP),
+          mx: (f.cx+t.cx)/2 - uy*14, my: (f.cy+t.cy)/2 + ux*14,
+        };
+      }
+
+      return (
+        <div>
+          <div className="sec-head">
+            <h2>Grafo da ontologia</h2>
+            <code style={{ font: "11px var(--font-mono)", color: "var(--text-faint)" }}>car.ttl</code>
+            <span className="rule"></span>
+            <span style={{ font: "12px var(--font-sans)", color: "var(--text-faint)" }}>
+              cada regra é um nó · cada relação é uma aresta
+            </span>
+          </div>
+          <div style={{ background: "rgba(0,10,5,.55)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-lg)", overflow: "hidden" }}>
+            <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", display: "block" }}>
+              <defs>
+                <marker id="og-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+                  <polygon points="0,0 8,3 0,6" fill="rgba(47,211,154,.5)" />
+                </marker>
+              </defs>
+              {edges.map(e => {
+                const p = ep(e.from, e.to);
+                return (
+                  <g key={e.from + e.to}>
+                    <line x1={p.x1} y1={p.y1} x2={p.x2} y2={p.y2}
+                      stroke="rgba(47,211,154,.28)" strokeWidth="1.5"
+                      strokeDasharray="5 3" markerEnd="url(#og-arr)" />
+                    <text x={p.mx} y={p.my} textAnchor="middle"
+                      style={{ font: "9.5px monospace", fill: "rgba(47,211,154,.42)" }}>{e.label}</text>
+                  </g>
+                );
+              })}
+              {nodes.map(n => (
+                <g key={n.id}>
+                  <rect x={n.cx - NW/2} y={n.cy - NH/2} width={NW} height={NH} rx="7"
+                    fill={n.main ? "rgba(47,211,154,.12)" : "rgba(0,18,8,.78)"}
+                    stroke={n.main ? "rgba(47,211,154,.58)" : "rgba(47,211,154,.2)"}
+                    strokeWidth={n.main ? "1.5" : "1"} />
+                  <text x={n.cx} y={n.cy - 9} textAnchor="middle"
+                    style={{ font: "10.5px monospace", fill: "#2FD39A" }}>{n.uri}</text>
+                  <text x={n.cx} y={n.cy + 7} textAnchor="middle"
+                    style={{ font: "11px system-ui,sans-serif", fill: "rgba(200,235,215,.75)" }}>{n.label}</text>
+                  {n.fonte && (
+                    <text x={n.cx} y={n.cy + 22} textAnchor="middle"
+                      style={{ font: "9px monospace", fill: "rgba(200,235,215,.32)" }}>{n.fonte}</text>
+                  )}
+                </g>
+              ))}
+            </svg>
+          </div>
+        </div>
+      );
+    }
+
+    /* =====================================================
        PROTOCOLO PAGE
     ===================================================== */
     function ProtocoloPage() {
@@ -435,6 +525,9 @@
               ))}
             </div>
           </div>
+
+          {/* Ontology graph */}
+          <OntologyGraph />
 
           {/* Ontology concepts */}
           <div>
