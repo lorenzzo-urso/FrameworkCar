@@ -88,7 +88,7 @@
 
     const ENRICH = {
       compadre: {
-        title: "Compadre", persona: "Seu Raimundo (produtor)", icon: "message-circle",
+        title: "Mestre da Terra", persona: "Seu Raimundo (produtor)", icon: "message-circle",
         tone: "pine", author: "Car Framework",
         detalhe: "Primeiro agente da plataforma. Conversa em linguagem simples, lê a situação do imóvel no SICAR e traduz cada pendência com a regra do Código Florestal por trás.",
         rastro: { source: "Lei 12.651/2012, Art. 29, §1º", trace: "car:Pendencia_CIB" },
@@ -184,7 +184,7 @@
 
     const NAV_TITLES = {
       agentes: "Agentes",
-      protocolo: "Protocolo",
+      protocolo: "Dia da Terra",
       governanca: "Governança",
       ecossistemas: "Ecossistemas",
       documentacao: "Documentação",
@@ -214,7 +214,7 @@
             <div style={{ font: "var(--fw-semibold) 10px var(--font-sans)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", padding: "0 6px 8px" }}>Plataforma</div>
             <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
               <NavItem icon="layout-grid" label="Agentes" badge={count} active={nav === "agentes"} onClick={() => onNav("agentes")} />
-              <NavItem icon="git-fork" label="Protocolo" active={nav === "protocolo"} onClick={() => onNav("protocolo")} />
+              <NavItem icon="git-fork" label="Dia da Terra" active={nav === "protocolo"} onClick={() => onNav("protocolo")} />
               <NavItem icon="shield-check" label="Governança" active={nav === "governanca"} onClick={() => onNav("governanca")} />
               <NavItem icon="globe-2" label="Ecossistemas" active={nav === "ecossistemas"} onClick={() => onNav("ecossistemas")} />
             </nav>
@@ -248,13 +248,13 @@
                 <input placeholder="Buscar agente ou regra…" style={{ border: "none", background: "transparent", outline: "none", color: "var(--text-body)", font: "13px var(--font-sans)", flex: 1 }} />
               </label>
               <Badge tone={env === "ao vivo" ? "active" : "muted"} dot>{env || "demo"}</Badge>
-              <Button variant="primary" size="sm" icon={<i data-lucide="plus"></i>} onClick={onNewAgent}>Publicar agente</Button>
+              <Button variant="primary" size="sm" icon={<i data-lucide="plus"></i>} onClick={onNewAgent} style={{ color: "#FFFFFF" }}>Publicar agente</Button>
             </header>
 
             {env !== "ao vivo" && (
-              <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 28px", background: "rgba(245,166,35,.07)", borderBottom: "1px solid rgba(245,166,35,.18)" }}>
-                <i data-lucide="info" style={{ width: 14, height: 14, color: "#F5A623", flex: "none" }}></i>
-                <span style={{ font: "12.5px var(--font-sans)", color: "rgba(245,166,35,.85)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 28px", background: "rgba(1,105,57,.06)", borderBottom: "1px solid rgba(1,105,57,.18)" }}>
+                <i data-lucide="info" style={{ width: 14, height: 14, color: "var(--accent)", flex: "none" }}></i>
+                <span style={{ font: "12.5px var(--font-sans)", color: "var(--text-body)" }}>
                   <strong>Modo demonstração</strong> — backend não conectado. Os dados exibidos são saída real do sistema rodando localmente; esta visualização estática é para GitHub Pages.
                 </span>
               </div>
@@ -332,10 +332,10 @@
       const open = !!agent;
       return (
         <>
-          <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(6,16,12,.55)", backdropFilter: "blur(2px)",
+          <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(17,17,17,.25)", backdropFilter: "blur(2px)",
             opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none", transition: "opacity .25s", zIndex: 40 }}></div>
           <aside style={{ position: "fixed", top: 0, right: 0, height: "100vh", width: 420, maxWidth: "92vw",
-            background: "var(--bg-canvas)", borderLeft: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-lg)", zIndex: 41,
+            background: "var(--surface-card)", borderLeft: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-lg)", zIndex: 41,
             transform: open ? "translateX(0)" : "translateX(100%)", transition: "transform .3s var(--ease-out)", display: "flex", flexDirection: "column" }}>
             {agent && (
               <>
@@ -502,7 +502,7 @@
         { n: "01", title: "Fontes abertas", desc: "SIGEF, MapBiomas, RER, SICAR — dados públicos com licença aberta", icon: "database" },
         { n: "02", title: "Camada semântica", desc: "car.ttl — ontologia do Código Florestal. Regras vira triples RDF, não texto", icon: "git-fork" },
         { n: "03", title: "Agent Hub", desc: "Manifestos YAML ativam agentes. Troca o manifesto, muda o agente — sem mexer no código", icon: "cpu" },
-        { n: "04", title: "Interfaces", desc: "WhatsApp (Compadre), API REST, Hub web — cada canal consome a mesma camada", icon: "layers" },
+        { n: "04", title: "Interfaces", desc: "WhatsApp (Mestre da Terra), API REST, Hub web — cada canal consome a mesma camada", icon: "layers" },
       ];
 
       return (
@@ -510,7 +510,7 @@
           {/* Hero */}
           <div className="hero">
             <div className="eyebrow">Camada semântica aberta do território</div>
-            <h1>O <em>Protocolo</em></h1>
+            <h1>Dia da <em>Terra</em></h1>
             <p>Uma ontologia do Código Florestal + um hub de agentes. Qualquer organização publica um agente. Todos raciocinam sobre a mesma verdade — rastreável, auditável, aberta.</p>
           </div>
 
@@ -609,14 +609,14 @@
                   imóvel → temAPP → FaixaAPP_ate10 → cruzamento com geometria SIGEF → déficit calculado
                 </div>
                 <p style={{ font: "13.5px/1.6 var(--font-sans)", color: "var(--text-muted)", margin: 0 }}>
-                  Quando o Compadre responde que o Raimundo tem 4,19ha de déficit, essa resposta não foi gerada — foi <strong style={{ color: "var(--text-body)" }}>derivada</strong>. É auditável. É contestável. É o mesmo raciocínio que o analista do OEMA usa para validar.
+                  Quando o Mestre da Terra responde que o Raimundo tem 4,19ha de déficit, essa resposta não foi gerada — foi <strong style={{ color: "var(--text-body)" }}>derivada</strong>. É auditável. É contestável. É o mesmo raciocínio que o analista do OEMA usa para validar.
                 </p>
                 <div style={{ background: "rgba(1,105,57,.07)", border: "1px solid rgba(1,105,57,.18)", borderRadius: "var(--radius-md)", padding: "14px 18px" }}>
                   <div style={{ font: "var(--fw-semibold) 13.5px var(--font-sans)", color: "var(--text-strong)", marginBottom: 6 }}>
                     Quando o governo publica uma nova portaria alterando as faixas de APP?
                   </div>
                   <p style={{ font: "13.5px/1.55 var(--font-sans)", color: "var(--text-muted)", margin: 0 }}>
-                    Edita-se um nó. Todos os agentes — Compadre, Auditor, Crédito — ficam corretos automaticamente. Nenhum modelo precisa ser retreinado.
+                    Edita-se um nó. Todos os agentes — Mestre da Terra, Auditor, Crédito — ficam corretos automaticamente. Nenhum modelo precisa ser retreinado.
                   </p>
                 </div>
               </div>
@@ -670,7 +670,7 @@
         {
           title: "Produtor Rural", icon: "tractor", cor: "amber", tag: "Persona primária",
           desc: "Consulta, corrige e acompanha o CAR via agentes autorizados. Sem senha técnica, sem SICAR diretamente.",
-          perms: ["Conversar com o Compadre (WhatsApp)", "Receber tradução das pendências", "Ver benefícios disponíveis (PSA, crédito)", "Acompanhar status do imóvel"],
+          perms: ["Conversar com o Mestre da Terra (WhatsApp)", "Receber tradução das pendências", "Ver benefícios disponíveis (PSA, crédito)", "Acompanhar status do imóvel"],
           bloqueios: ["Editar dados de terceiros", "Acessar painel de analistas"],
         },
         {
@@ -700,7 +700,7 @@
       ];
 
       const compromisos = [
-        { icon: "code-2", title: "Código aberto", desc: "Ontologia, Agent Hub e Compadre sob Apache 2.0. Qualquer um inspeciona, bifurca, melhora." },
+        { icon: "code-2", title: "Código aberto", desc: "Ontologia, Agent Hub e Mestre da Terra sob Apache 2.0. Qualquer um inspeciona, bifurca, melhora." },
         { icon: "database", title: "Dados abertos", desc: "Apenas bases públicas e com licença Creative Commons. Nenhum dado pessoal do produtor neste repositório." },
         { icon: "server", title: "Auto-hospedável", desc: "Construído sobre o RER do governo (Docker). Qualquer estado roda a sua própria instância." },
         { icon: "globe", title: "Bem Público Digital", desc: "Alinhado ao padrão DPG da ONU. Adaptável para outros países e outros códigos florestais." },
@@ -1134,7 +1134,7 @@ llm:
           <div>
             <div className="sec-head"><h2>Quick start — 3 endpoints</h2><span className="rule"></span><code style={{ font: "11px var(--font-mono)", color: "var(--text-faint)" }}>localhost:8000</code></div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
-              <StepCard n="1" method="POST" path="/conversa" desc="O produtor manda o número do CAR + mensagem; o Compadre responde com rastreabilidade." />
+              <StepCard n="1" method="POST" path="/conversa" desc="O produtor manda o número do CAR + mensagem; o Mestre da Terra responde com rastreabilidade." />
               <StepCard n="2" method="GET"  path="/agentes"  desc="Lista todos os agentes registrados no Hub — nome, ferramentas, conceitos e status." />
               <StepCard n="3" method="GET"  path="/analise/demo" desc="Análise de déficit de APP: cruza geometria real com a ontologia e devolve o resultado antes do envio." />
             </div>
@@ -1349,8 +1349,8 @@ llm:
         setSelected(null);
         if (agent.name === "compadre" || agent.name === "professor") {
           const msg = agent.name === "professor"
-            ? "Professor responde via Compadre — pergunte sobre APP, Reserva Legal ou o Código Florestal."
-            : "Abrindo o Compadre…";
+            ? "Professor responde via Mestre da Terra — pergunte sobre APP, Reserva Legal ou o Código Florestal."
+            : "Abrindo o Mestre da Terra…";
           fireToast(msg);
           setTimeout(() => { window.location.href = "compadre.html"; }, 1800);
         } else {
@@ -1367,7 +1367,7 @@ llm:
               <section className="hero">
                 <div className="eyebrow">Soluções para o Cadastro Ambiental Rural</div>
                 <h1>Agent <em>Hub</em></h1>
-                <p>Uma camada semântica aberta. Múltiplos agentes. O mesmo conhecimento do território.</p>
+                <p>Nutrindo autonomia para quem vive da e com a terra.</p>
                 <ProtocoloBanner />
               </section>
               <div className="sec-head">
@@ -1382,7 +1382,7 @@ llm:
                 ))}
               </div>
               <p className="foot">
-                O Compadre é o primeiro agente. A plataforma é aberta: governo, cooperativas e
+                O Mestre da Terra é o primeiro agente. A plataforma é aberta: governo, cooperativas e
                 pesquisadores publicam os seus — todos sobre o mesmo protocolo.
               </p>
               <AgentDetail agent={selectedAgent} onClose={() => setSelected(null)} onOpen={abrirAgente} />
