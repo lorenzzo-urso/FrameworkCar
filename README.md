@@ -99,10 +99,13 @@ ficam corretos automaticamente. Nenhum chatbot existente faz isso.
 ## Screenshots
 
 <p align="center">
-  <img src="docs/demos/inicio-chat.gif" alt="Compadre — início da conversa" width="420" />
-  &nbsp;&nbsp;
-  <img src="docs/demos/perguntas-chat.gif" alt="Compadre — perguntas ao Professor" width="420" />
-  <br/><sub>Compadre em ação — conversa real com o Mestre da Terra</sub>
+  <img src="docs/demos/inicio-chat.gif" alt="Compadre — início da conversa" width="600" />
+  <br/><sub>Início — Compadre analisa o CAR e explica as pendências</sub>
+</p>
+
+<p align="center">
+  <img src="docs/demos/perguntas-chat.gif" alt="Compadre — perguntas ao Professor" width="600" />
+  <br/><sub>Professor — responde perguntas sobre o Código Florestal em linguagem simples</sub>
 </p>
 
 <p align="center">
