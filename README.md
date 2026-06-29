@@ -99,6 +99,13 @@ ficam corretos automaticamente. Nenhum chatbot existente faz isso.
 ## Screenshots
 
 <p align="center">
+  <img src="docs/demos/inicio-chat.gif" alt="Compadre — início da conversa" width="420" />
+  &nbsp;&nbsp;
+  <img src="docs/demos/perguntas-chat.gif" alt="Compadre — perguntas ao Professor" width="420" />
+  <br/><sub>Compadre em ação — conversa real com o Mestre da Terra</sub>
+</p>
+
+<p align="center">
   <img src="docs/assets/screenshot-hub-agentes.png" alt="Agent Hub — Agentes" width="100%" />
   <br/><sub>Agent Hub — catálogo de agentes especializados</sub>
 </p>
