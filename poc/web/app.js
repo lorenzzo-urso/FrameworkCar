@@ -242,6 +242,6 @@ entrada.addEventListener("keydown", (e) => { if (e.key === "Enter") mandar(); })
 
 // abertura
 window.addEventListener("load", () => {
-  bolha(“in”, “👋 Oi! Sou o <b>Mestre da Terra</b> 🌱 Tô aqui pra te ajudar a resolver o CAR sem precisar entender a lei toda. Manda um <b>oi</b> pra começar.”);
+  bolha("in", "👋 Oi! Sou o <b>Mestre da Terra</b> 🌱 Tô aqui pra te ajudar a resolver o CAR sem precisar entender a lei toda. Manda um <b>oi</b> pra começar.");
   if (consoleLog) logLinha(`<span class="out">aguardando o produtor… <span class="pisca"></span></span>`);
 });

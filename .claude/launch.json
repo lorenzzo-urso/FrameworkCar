@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "8099", "--directory", "poc/web"],
       "port": 8099
+    },
+    {
+      "name": "card-generator",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8100", "--directory", "card-generator"],
+      "port": 8100
     }
   ]
 }
