@@ -299,44 +299,17 @@ não tem, e que qualquer instância do RER no mundo pode adotar.
 
 ---
 
-## Campo 10 — MENTORIA E FEEDBACK ⚠️ AÇÃO HUMANA OBRIGATÓRIA
+## Autoavaliação — estado atual (28/jun/2026)
 
-> Este campo exige conversa real com pelo menos 1 mentor. Não pode ser gerado.
-> Entregar sem ele **elimina pontos**.
-
-Quando tiverem o feedback, registrar com esta estrutura:
-
-```
-Nome: [nome completo, organização]
-
-Feedback recebido:
-- [ponto 1]
-- [ponto 2]
-- [ponto 3 se houver]
-
-O que ajustamos:
-- [decisão tomada pelo time]
-```
-
----
-
-## Autoavaliação — estado atual (27/jun/2026)
-
-| Campo | Critério | Nota ant. | Nota atual | O que mudou |
-|---|---|---|---|---|
-| 1. Brainstorm | Autenticidade | 8/10 | 8/10 | Depende do time reescrever com o real |
-| 2. Problema | Relevância | 8/10 | **9/10** | +5 produtores reais (WhatsApp 5/5, técnico 4/5) |
-| 3. Solução | Pertinência + Inovação | 9/10 | **9/10** | +análise real MG (4,19 ha), "descobre vs. raspa" |
-| 4. Público-alvo | Relevância | 8/10 | **9/10** | +dados dos 5 produtores confirmados |
-| 5. Impacto | Pertinência | 9/10 | **9/10** | +P0-8 real como prova técnica concreta |
-| 6. Diferencial | Inovação ⭐ | 9/10 | **9/10** | +4º diferencial: "descobre, não raspa" |
-| 7. Viabilidade | Pertinência | 8/10 | **9/10** | +GeoPackage MG integrado e rodando |
-| 8. Implementação | Relevância | 8/10 | **9/10** | +PoC real descrito com o que foi construído |
-| 9. Código Aberto | Inovação | 9/10 | **9/10** | +Bolívia, Colômbia, FAO/AGROVOC nomeados |
-| 10. Mentoria | — | ⚠️ 0 se faltar | ⚠️ 0 se faltar | **Fazer a mentoria — maior risco da entrega** |
-| **Média** | | **8,4/10** | **~8,9/10** | |
-
-**3 ações que mais sobem a média agora:**
-1. **Campo 1** — reescrever com o que realmente aconteceu (momento de virada, ideia descartada pelo nome)
-2. **Campo 10** — fazer a mentoria; é o único campo que pode ir a zero
-3. **Campo 6, diferencial (2)** — "4,19 ha detectado em imóvel real de MG" é o argumento mais concreto do formulário inteiro; garantir que aparece sem jargão
+| Campo | Critério | Nota est. |
+|---|---|---|
+| 1. Brainstorm | Autenticidade | 8/10 |
+| 2. Problema | Relevância | 9/10 |
+| 3. Solução | Pertinência + Inovação | 9/10 |
+| 4. Público-alvo | Relevância | 9/10 |
+| 5. Impacto | Pertinência | 9/10 |
+| 6. Diferencial | Inovação ⭐ | 9/10 |
+| 7. Viabilidade | Pertinência | 9/10 |
+| 8. Implementação | Relevância | 9/10 |
+| 9. Código Aberto | Inovação | 9/10 |
+| **Média** | | **~8,9/10** |

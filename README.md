@@ -34,14 +34,14 @@ rural não consegue usar. **O problema não é falta de informação — é falt
 necessária retificação cadastral"*. Não entende uma palavra. Guarda na gaveta.
 O crédito rural fica bloqueado.
 
-**Depois:** Manda "oi" pro **Compadre** no WhatsApp. O Compadre leu a notificação por ele:
+**Depois:** Manda "oi" pro **Mestre da Terra** no WhatsApp. O Mestre da Terra leu a notificação por ele:
 *"Acharam uma diferença na área perto do seu rio. É isso aqui, ó. Pra resolver,
 é só confirmar esse limite no mapa — eu já deixei quase pronto."*
 Em minutos, entendeu, corrigiu — e descobriu que o CAR em dia libera o Pronaf Eco.
 
 <p align="center">
-  <img src="docs/demos/inicio-chat.gif" alt="Compadre — Mestre da Terra analisa o CAR" width="600" />
-  <br/><sub>Compadre ao vivo — pendências traduzidas, ontologia rastreável, benefícios desbloqueados</sub>
+  <img src="docs/demos/inicio-chat.gif" alt="Mestre da Terra analisa o CAR" width="600" />
+  <br/><sub>Mestre da Terra ao vivo — pendências traduzidas, ontologia rastreável, benefícios desbloqueados</sub>
 </p>
 
 ---
@@ -52,7 +52,7 @@ A solução tem duas faces que trabalham juntas:
 
 | | |
 |---|---|
-| **Compadre** | O agente que o produtor vê — conversa pelo WhatsApp, traduz pendências, explica as regras, descobre problemas antes da fiscalização. |
+| **Mestre da Terra** | O agente que o produtor vê — conversa pelo WhatsApp, traduz pendências, explica as regras, descobre problemas antes da fiscalização. |
 | **Terra Comum** | O motor que ninguém vê — ontologia do Código Florestal + grafo de conhecimento + Agent Hub, sobre o RER open-source. É o que garante que a resposta seja rastreável, não inventada. |
 
 Princípio: **esconde a máquina pesada. Ensina só o essencial.**
@@ -134,7 +134,7 @@ Com `uvicorn` rodando, tudo acima **mais**:
 
 | Agente | Para quem |
 |---|---|
-| `compadre` | Produtor rural — entende, declara, corrige o CAR |
+| `compadre` · Mestre da Terra | Produtor rural — entende, declara, corrige o CAR |
 | `professor` | Explica o Código Florestal em linguagem livre |
 | `auditor` | Analistas dos OEMAs — parecer técnico, ciclo de retificação |
 | `territorial` | Governo — déficit de RL por município, áreas críticas |
@@ -204,6 +204,8 @@ As fontes de dados viram os sentidos.
 git clone https://github.com/lorenzzo-urso/CarFramework.git
 cd CarFramework
 ```
+
+> **Windows.** Os comandos abaixo usam sintaxe Windows (`Scripts\activate`). No Mac/Linux substitua por `.venv/bin/activate`.
 
 **Só o frontend (modo estático):**
 ```bash
